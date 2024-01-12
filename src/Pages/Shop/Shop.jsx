@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../../Components/Resuse/Container/Container';
 import FilterBox from './FilterBox';
 import { TfiViewGrid } from "react-icons/tfi";
@@ -91,13 +91,15 @@ const Shop = () => {
    
 ]
 
-
+useEffect(()=>{
+    setCardStyle(localStorage.getItem('ego-card-style') || 'grid')
+})
 
 const handleCardStyle = (value)=> {
-    
     setCardStyle(value)
+    localStorage.setItem('ego-card-style',value)
 };
-console.log(cardStyle)
+
 
     return (
         <div className='bg-[#f5f5f5] py-10 font-rubik'>
@@ -111,11 +113,11 @@ console.log(cardStyle)
                     <div className='lg:w-[80%] lg:px-0 px-2'>
                         <h1 className='text-black text-3xl'>SMARTPHONE</h1>
                         <div className='py-4 px-2 my-4 bg-white flex justify-between items-center'>
-                        <div className='p-2 bg-[#FF2424] text-white text-xl font-semibold lg:hidden'><LuFilter></LuFilter> </div>
+                        <div className='p-2 bg-[#FF2424] text-white text-xl font-semibold lg:hidden hover:cursor-pointer'><LuFilter></LuFilter> </div>
                           <div className='lg:flex items-center gap-4 lg:block hidden'>
                           <div className='flex items-center gap-2'>
-                                <div className={`p-2 ${cardStyle === 'grid'?'bg-[#FF2424] text-white':'bg-[#f5f5f5] text-black' } text-xl`}  onClick={()=> handleCardStyle('grid')}><IoGridOutline></IoGridOutline></div>
-                                <div className={`p-2 ${cardStyle === 'list'?'bg-[#FF2424] text-white':'bg-[#f5f5f5] text-black' } text-xl`} onClick={()=>handleCardStyle('list')}>
+                                <div className={`p-2 ${cardStyle === 'grid'?'bg-[#FF2424] text-white':'bg-[#f5f5f5] text-black' } text-xl hover:cursor-pointer`}  onClick={()=> handleCardStyle('grid')}><IoGridOutline></IoGridOutline></div>
+                                <div className={`p-2 ${cardStyle === 'list'?'bg-[#FF2424] text-white':'bg-[#f5f5f5] text-black' } text-xl hover:cursor-pointer`} onClick={()=>handleCardStyle('list')}>
                                    <FaList></FaList>
                                     </div>
                             </div>
@@ -153,7 +155,7 @@ console.log(cardStyle)
                     </div>
 }
                         {/* Pagination section */}
-                        <div className='mt-10 py-4 px-2 bg-white flex justify-between  items-center '>
+                        <div className='mt-10 py-4 px-2 bg-white md:flex justify-between  items-center md:block hidden '>
                             <div className='flex items-center gap-3'>
                                 <div className='p-2 px-4 bg-[#FF2424] text-white '>1</div>
                                 <div className='p-2 px-4 bg-[#FF2424] text-white '>1</div>

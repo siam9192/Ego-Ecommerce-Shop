@@ -5,6 +5,7 @@ import Router from '../Router/Router';
 import Register from '../Pages/Register/Register';
 import SignIn from '../Pages/SignIn/SignIn';
 import Shop from '../Pages/Shop/Shop';
+import ProductDetails from '../Pages/ProductDetails/ProductDetails';
 
 const Routes = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const Routes = createBrowserRouter([
             {
                 path:'/ego/shop',
                 element:<Shop></Shop>
+            },
+            {
+                path:'/ego/product/:id/details',
+                element:<ProductDetails></ProductDetails>
             },
             {
                 path:'/ego/account/register',

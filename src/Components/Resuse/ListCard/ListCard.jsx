@@ -4,10 +4,17 @@ import { IoSearch } from 'react-icons/io5';
 import { PiShoppingBagOpenBold } from 'react-icons/pi';
 import { TiStarFullOutline, TiStarHalfOutline } from 'react-icons/ti';
 import Rating from 'react-rating';
+import { useNavigate } from 'react-router-dom';
 
 const ListCard = ({product}) => {
+    const navigate = useNavigate();
+
+
+    const handleNavigate = (id)=>{
+        navigate('/ego/product/id/details')
+    }
     return (
-        <div className='p-5 bg-white lg:flex font-rubik'>
+        <div className='p-5 bg-white lg:flex font-rubik hover:cursor-pointer' onClick={()=>handleNavigate(89)}>
          <div className='lg:w-[30%]'>
             <img src={product.image} alt="" />
          </div>
