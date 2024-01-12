@@ -11,7 +11,7 @@ const ColumnCard = ({product,index}) => {
          setHover(value)
     }
     return (
-        <div className={`flex flex-col space-y-3 font-rubik p-5 hover:shadow-lg relative h-full overflow-hidden `}  onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
+        <div className={`flex flex-col space-y-3 font-rubik p-5 hover:shadow-lg relative h-full overflow-hidden bg-white `}  onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
            <div className='flex justify-center items-center flex-grow'>
            <img src={product.image} alt="" className='w-60'/>
            </div>

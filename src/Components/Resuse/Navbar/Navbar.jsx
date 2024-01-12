@@ -94,7 +94,7 @@ const handleAccountBar = ()=>{
                     <nav >
                     <ul className='flex text-black items-center gap-4'>
                         <Link>Home</Link>
-                        <Link>Shop</Link>
+                        <Link to='/ego/shop'>Shop</Link>
                         <Link>New Arrivals</Link>
                         <Link>Contact Us</Link>
                         <Link>About Us</Link>

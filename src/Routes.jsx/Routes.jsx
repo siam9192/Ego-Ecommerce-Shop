@@ -4,6 +4,7 @@ import Home from '../Pages/Home/Home';
 import Router from '../Router/Router';
 import Register from '../Pages/Register/Register';
 import SignIn from '../Pages/SignIn/SignIn';
+import Shop from '../Pages/Shop/Shop';
 
 const Routes = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const Routes = createBrowserRouter([
             {
                 path:'/',
                 element:<Home></Home>
+            },
+            {
+                path:'/ego/shop',
+                element:<Shop></Shop>
             },
             {
                 path:'/ego/account/register',
