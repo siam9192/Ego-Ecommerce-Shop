@@ -6,6 +6,8 @@ import Register from '../Pages/Register/Register';
 import SignIn from '../Pages/SignIn/SignIn';
 import Shop from '../Pages/Shop/Shop';
 import ProductDetails from '../Pages/ProductDetails/ProductDetails';
+import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
+import About from '../Pages/About/About';
 
 const Routes = createBrowserRouter([
     {
@@ -23,6 +25,14 @@ const Routes = createBrowserRouter([
             {
                 path:'/ego/product/:id/details',
                 element:<ProductDetails></ProductDetails>
+            },
+            {
+                path:'/about',
+                element:<About></About>
+            },
+            {
+                path:'/ego/my-cart',
+                element:<ShoppingCart></ShoppingCart>
             },
             {
                 path:'/ego/account/register',

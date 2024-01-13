@@ -100,21 +100,30 @@ const previousIndex = ()=>{
             <Container>
                 <div className=' font-rubik bg-white'>
                <div className='py-2 px-4 pb-4 border-b-2 border-l-4 border-l-black flex justify-between items-center'>
-               <h1 className=' uppercase text-3xl text-black'>Top selling</h1>
+               <h1 className=' uppercase md:text-2xl text-xl text-black'>Top selling</h1>
                 <div className='flex items-center gap-[2px]'>
                 <div className='bg-gray-200 text-black px-4 py-2' onClick={previousIndex}><FaArrowLeftLong></FaArrowLeftLong></div>
                 <div className='bg-gray-200 text-black px-4 py-2' onClick={nextIndex}><FaArrowRightLong></FaArrowRightLong></div>
                </div>
                </div>
               <div>
-            <div className='mt-5 min-h-[500px] overflow-x-hidden relative'>
+              <div className='pt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
               
-                {
-                    products.map((product,index)=>{
-                        return <SliderCard product = {product} index={index} divIndex={divIndex} key={index}></SliderCard>
-                    })
-                }
-                </div>
+              <div className='col-span-1 p-2 h-full lg:block hidden'>
+                 <img src="/images/image/top_sell.jpg" className='h-full' alt="" />
+              </div>
+              <div className='col-span-3 w-full'>
+              <div className='mt-5 min-h-[500px] overflow-x-hidden relative'>
+              
+              {
+                  products.map((product,index)=>{
+                      return <SliderCard product = {product} index={index} divIndex={divIndex} key={index}></SliderCard>
+                  })
+              }
+              </div>
+              </div>
+                 </div>
+            
               </div>
                 </div>
             </Container>

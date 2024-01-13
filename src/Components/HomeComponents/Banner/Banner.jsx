@@ -22,17 +22,17 @@ const Banner = () => {
         }
         setBannerIndex(prev);
     }
-    // useEffect(()=>{
-    //     setInterval(()=>{
-    //         if(bannerIndex+1 === bannerImages.length){
-    //             setBannerIndex(0);
-    //             return;
-    //         }
-    //         setBannerIndex(bannerIndex+1);
+    useEffect(()=>{
+        setInterval(()=>{
+            if(bannerIndex+1 === bannerImages.length){
+                setBannerIndex(0);
+                return;
+            }
+            setBannerIndex(bannerIndex+1);
            
-    //     },5000)
+        },5000)
         
-    // },[bannerIndex])
+    },[bannerIndex])
     
     return (
         <div>

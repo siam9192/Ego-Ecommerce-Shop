@@ -9,6 +9,7 @@ const Navbar = () => {
 //   Hooks
 const [departmentsMenu,setDepartmentsMenu] = useState(false)
 const [accountBar,setAccountBar]  = useState(false);
+const [cardBar,setCartBar] = useState(false);
 
     const categories = ["Electronics", "Clothing & Fashion", "Home & Furniture", "Beauty & Personal Care", "Books & Media", "Sports & Outdoors", "Toys & Games", "Automotive", "Health & Wellness", "Appliances", "Jewelry & Accessories", "Pet Supplies", "Office & Stationery", "Gourmet Food & Grocery", "Baby & Kids", "Travel & Luggage", "Crafts & Hobbies", "Gifts & Occasions", "Art & Collectibles", "Fitness & Exercise", "Garden & Outdoor", "Tech Accessories", "Musical Instruments", "Party Supplies", "Smart Home", "Kitchen & Dining", "DIY & Tools", "Virtual Reality", "Watches"];
     const departments = ["Electronics", "Clothing", "Home & Furniture", "Beauty & Personal Care", "Books & Media", "Sports & Outdoors", "Toys & Games", "Automotive", "Health & Wellness", "Appliances", "Jewelry & Accessories", "Pet Supplies", "Office & Stationery", "Gourmet Food & Grocery", "Baby & Kids", "Travel & Luggage", "Crafts & Hobbies", "Gifts & Occasions", "Art & Collectibles", "Fitness & Exercise", "Garden & Outdoor", "Tech Accessories", "Musical Instruments", "Party Supplies", "Smart Home", "Kitchen & Dining", "DIY & Tools", "Virtual Reality", "Watches"];
@@ -20,6 +21,9 @@ setDepartmentsMenu(value)
 
 const handleAccountBar = ()=>{
   setAccountBar(!accountBar)
+}
+const handleCard =() =>{
+  setCartBar(!cardBar)
 }
 
     return (
@@ -69,7 +73,7 @@ const handleAccountBar = ()=>{
              <FiHeart className='text-2xl text-black hover:text-[red] lg:block hidden'></FiHeart>
              </div>
              <div>
-             <PiShoppingBagOpenBold className='text-2xl text-black hover:text-[red]'></PiShoppingBagOpenBold>
+            <Link to={'/ego/my-cart'}><PiShoppingBagOpenBold className='text-2xl text-black hover:text-[red]'></PiShoppingBagOpenBold></Link>
              </div>
              <div>
                 <h4 className='text-xl text-black lg:block hidden'>$0.00</h4>
@@ -97,7 +101,7 @@ const handleAccountBar = ()=>{
                         <Link to='/ego/shop'>Shop</Link>
                         <Link>New Arrivals</Link>
                         <Link>Contact Us</Link>
-                        <Link>About Us</Link>
+                        <Link to='/about'>About Us</Link>
                     </ul>
                 </nav>
               

@@ -109,11 +109,9 @@ const previousIndex = ()=>{
               <div>
             {/* <div className='pt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
               
-                {
-                    products.slice(0,4).map((product,index)=>{
-                        return <ColumnCard product = {product} index={index} divIndex={divIndex} key={index}></ColumnCard>
-                    })
-                }
+             <div className='col-span-1'>
+                <img src="/images/image/top_sell.jpg" alt="" />
+             </div>
                 </div> */}
                 <div className='relative min-h-[500px] overflow-x-auto'>
                 {

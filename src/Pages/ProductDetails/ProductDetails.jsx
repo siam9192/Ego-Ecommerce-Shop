@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Container from '../../Components/Resuse/Container/Container';
-import Rating from 'react-rating';
+import { Rating } from '@mui/material';
 import { TiStarFullOutline, TiStarHalfOutline } from 'react-icons/ti';
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { FiHeart } from 'react-icons/fi';
 import ProductReviews from './ProductReviews';
 import DetailsSideComponents from './DetailsSideComponents';
+
 const ProductDetails = ({dangerouslySetInnerHTML}) => {
+    const [ratting,setRatting] = useState(1)
     const [tabIndex,setTabIndex] = useState(0);
     const [cart,setCart] = useState(1);
     const tabs = ['description','more information','reviews','report'];
@@ -23,7 +25,7 @@ const ProductDetails = ({dangerouslySetInnerHTML}) => {
         setCart(decrease)
     }
     }
-
+const rattingPreview = ['So poor','Good','Very good','Great']
     const text = `MSI G244F E2 23.8 inch FHD Rapid IPS 180Hz Gaming Monitor
 
 The MSI G244F E2 monitor is a 23.8-inch Rapid IPS panel display that provides a sharp 1920 x 1080 pixel (FHD) resolution. With its amazing 1ms reaction time (GTG) and quick 180 Hz refresh rate, it's perfect for fast-paced gaming. Vibrant images are guaranteed by the monitor's 250 nits of brightness and 1000:1 contrast ratio. Owing to its IPS display, the monitor provides 178 degrees of horizontal and vertical viewing angle. This monitor is perfect for content production and graphics work because of its remarkable color capabilities, which encompass 94.4% Adobe RGB, 92.05% DCI-P3, and 122.88% sRGB color gamut. Moreover, Adaptive-Sync technology is included to stop screen tearing and stuttering when playing games. It includes Night Vision to improve visibility in low light conditions and Anti-Flicker and Less Blue Light technologies to lessen eye strain during extended use for increased comfort. It has one Display Port (1.2a), two HDMI (2.0b) connectors, and one Earphone out for connectivity. MSI G244F E2 23.8 inch gaming monitor can also be mounted using VESA hardware and comes with a Kensington lock for added security. When not in the stand, the monitor weights 4.2 kg.
@@ -106,6 +108,9 @@ In Bangladesh, you can get the original MSI G244F E2 23.8 FHD Rapid IPS 180Hz Ga
                         <h1 className='text-black font-semibold text-xl'>Config product Apple 128GB - Black</h1>
                         <div className='space-y5'>
                     <h2 className='text-black font-semibold'>Your Ratting <span className='text-red-500'> *</span></h2>
+                   <div className='flex it-center gap-3'>
+                   <Rating name="size-large" defaultValue={2} onChange={(e)=>setRatting(e.target.value)}/> <h2>{ratting < 3 && rattingPreview[0] || ratting >= 3 & ratting < 5 && rattingPreview[1] || ratting > 4 & ratting <= 5 && rattingPreview[3] }</h2>
+                   </div>
                     <form action="" className='space-y-4'>
                     
                      <div>

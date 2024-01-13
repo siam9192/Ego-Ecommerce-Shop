@@ -12,7 +12,7 @@ const SliderCard = ({product,index,divIndex}) => {
     }
     
     return (
-        <div className={`flex flex-col space-y-3 font-rubik p-5 hover:shadow-lg  min-w-[300px] overflow-hidden bg-white absolute h-fit transition-transform ease-in-out duration-200`} style={{left:`${index*300}px`,transform:`translateX(-${divIndex*100}%)`}} onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
+        <div className={`flex flex-col space-y-3 font-rubik px-5 py-2 hover:shadow-lg  min-w-[300px] overflow-hidden bg-white absolute h-fit transition-transform ease-in-out duration-200`} style={{left:`${index*300}px`,transform:`translateX(-${divIndex*100}%)`}} onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
            <div className='flex justify-center items-center flex-grow'>
            <img src={product.image} alt="" className='w-60'/>
            </div>
