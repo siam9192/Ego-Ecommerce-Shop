@@ -86,10 +86,10 @@ setArray1([[products[0],products[1]],[products[2],products[3]],[products[4],prod
                 <div className='bg-gray-200 text-black px-4 py-2' onClick={nextIndex}><FaArrowRightLong></FaArrowRightLong></div>
                </div>
                 </div>
-               <div className=' relative overflow-x-auto  '>
+               <div className=' relative overflow-x-hidden  min-h-[300px]'>
                 {
-                    products.slice(0,3).map((product,index)=>{
-                       return <div className={`my-4 w-full  grid grid-cols-2 px-2  bg-white  transition-all duration-200 ease-in `}>
+                    products.map((product,index)=>{
+                       return <div className={`my-4 w-full  grid md:grid-cols-2 px-2  bg-white  transition- duration-[400ms] ease-in  absolute`} style={{transform:`translateX(-${divIndex*100}%)`,left:`${index*100}%`}}>
                         <div className='p-2 hover:shadow-md flex gap-4'>
                        <div className='w-[40%] relative'>
                            <img src={product.image} alt="" className='' />

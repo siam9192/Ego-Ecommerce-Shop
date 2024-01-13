@@ -4,16 +4,15 @@ import { IoSearch } from 'react-icons/io5';
 import { PiShoppingBagOpenBold } from 'react-icons/pi';
 import { TiStarFullOutline, TiStarHalfOutline } from 'react-icons/ti';
 import Rating from 'react-rating';
-import { Link } from 'react-router-dom';
 
-const ColumnCard = ({product,index}) => {
+const SliderCard = ({product,index,divIndex}) => {
     const [hover,setHover] = useState(false)
     const handleHover = (value)=>{
          setHover(value)
     }
+    
     return (
-        <Link to={'/ego/product/id/details'}>
-          <div className={`flex flex-col space-y-3 font-rubik p-5 hover:shadow-lg relative h-full overflow-hidden bg-white `}  onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
+        <div className={`flex flex-col space-y-3 font-rubik p-5 hover:shadow-lg  min-w-[300px] overflow-hidden bg-white absolute h-fit transition-transform ease-in-out duration-200`} style={{left:`${index*300}px`,transform:`translateX(-${divIndex*100}%)`}} onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
            <div className='flex justify-center items-center flex-grow'>
            <img src={product.image} alt="" className='w-60'/>
            </div>
@@ -39,8 +38,7 @@ const ColumnCard = ({product,index}) => {
                            </div>
                          </div>
         </div>
-        </Link>
     );
 }
 
-export default ColumnCard;
+export default SliderCard;

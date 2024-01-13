@@ -81,7 +81,7 @@ const RecomendedProducts = () => {
            <div className='py-2 px-4 pb-4 border-b-2 border-l-4 border-l-black flex justify-between items-center'>
            <h1 className=' uppercase text-3xl text-black'>Reccomended For You</h1>
            </div>
-           <div className='pt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+           <div className='pt-5 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4'>
            {
                     products.slice(0,4).map((product,index)=>{
                         return <ColumnCard product = {product} index={index}  key={index}></ColumnCard>

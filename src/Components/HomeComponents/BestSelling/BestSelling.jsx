@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Container from '../../Resuse/Container/Container';
 import ColumnCard from '../../Resuse/ProductCards/ColumnCard';
 import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
+import SliderCard from '../../Resuse/ProductCards/SliderCard';
 const BestSelling = () => {
     const [divIndex,setDivIndex] = useState(0);
     const products = [{
@@ -93,6 +94,7 @@ const previousIndex = ()=>{
     }
     setDivIndex(prev);
 }
+
     return (
         <div className='mt-5'>
             <Container>
@@ -105,11 +107,18 @@ const previousIndex = ()=>{
                </div>
                </div>
               <div>
-            <div className='pt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+            {/* <div className='pt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
               
                 {
                     products.slice(0,4).map((product,index)=>{
                         return <ColumnCard product = {product} index={index} divIndex={divIndex} key={index}></ColumnCard>
+                    })
+                }
+                </div> */}
+                <div className='relative min-h-[500px] overflow-x-auto'>
+                {
+                    products.map((product,index)=>{
+                        return <SliderCard product = {product} index={index} divIndex={divIndex} key={index}></SliderCard>
                     })
                 }
                 </div>

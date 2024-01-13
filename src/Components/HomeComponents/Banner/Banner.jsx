@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../../Resuse/Container/Container';
 import { IoIosArrowForward } from "react-icons/io";
 const Banner = () => {
@@ -22,23 +22,24 @@ const Banner = () => {
         }
         setBannerIndex(prev);
     }
-    setInterval(()=>{
-       
-        if(bannerIndex+1 === bannerImages.length){
-            setBannerIndex(0);
-            return;
-        }
-        setBannerIndex(bannerIndex+1);
-       
-    },5000)
-    
+    // useEffect(()=>{
+    //     setInterval(()=>{
+    //         if(bannerIndex+1 === bannerImages.length){
+    //             setBannerIndex(0);
+    //             return;
+    //         }
+    //         setBannerIndex(bannerIndex+1);
+           
+    //     },5000)
+        
+    // },[bannerIndex])
     
     return (
         <div>
-                <div className='flex relative max-w-7xl mx-auto overflow-hidden'>
+                <div className=' relative lg:h-[500px] md:h-[350px] h-[200px]  max-w-7xl mx-auto overflow-hidden '>
                    {
                     bannerImages.map((image,index)=>{
-                        return  <img src={image} alt="" className={`transition-all duration-200 ease-in left-[${index*100}%]`} style={{transform:`translate3D(-${bannerIndex*100}%,0px,0px)`}}  key={index} />
+                        return  <img src={image} alt="" className={`transition-transform duration-200 ease-in absolute w-full h-full`} style={{transform:`translateX(-${bannerIndex*100}%)`,left:`${index*100}%`}}  key={index} />
                         
                     })
                    }
