@@ -94,7 +94,6 @@ useEffect(()=>{
   
 },[])
 
-console.log(products2)
 
     return (
         <div className='font-rubik py-6'>
@@ -177,11 +176,74 @@ console.log(products2)
                     })
                 }
                </div>
-              <div className='lg:hidden block'>
+              {/* <div className='lg:hidden block'>
                 {
                   products2.map((product,n)=>{
                         return    <div className='p-2 hover:shadow-md lg:flex gap-4' key={n}>
                         <div className='lg:w-[40%] relative'>
+                            <img src={product.image} alt="" className='' />
+                            <div className='bg-[#FF2424] text-white uppercase px-4 py-1 absolute top-1 right-1'><h4>SALE</h4></div>
+                        </div>
+                        <div className='space-y-3'>
+                            <h2 className='text-gray-900 text-2xl'>{product.name}</h2>
+                           <div className='text-xl text-[#FF385c]'>
+                           <Rating
+          initialRating={4}
+          emptySymbol={<TiStarHalfOutline></TiStarHalfOutline>}
+          fullSymbol={<TiStarFullOutline></TiStarFullOutline>}
+          readonly
+        />
+                           </div>
+                          <h1 className='text-3xl font-semibold text-[#FF4242] '>${Math.round(product.price-(product.discount/product.price)*100)} {product.discount && <s className='text-xl text-gray-500 font-normal '>${product.price}</s>}</h1>
+                          <div className='flex items-center gap-2 text-black'>
+                          <div className='bg-gray-200 p-2 rounded-full text-xl'>
+                                <PiShoppingBagOpenBold></PiShoppingBagOpenBold>
+                            </div>
+                          <div className='bg-gray-200 p-2 rounded-full text-xl'>
+                        <FiHeart></FiHeart>
+                            </div>
+                            <div className='bg-gray-200 p-2 rounded-full text-xl'>
+                                <IoSearch></IoSearch>
+                            </div>
+                          </div>
+                          <div>
+                          <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
+          <div className="flex flex-col">
+            <span className="countdown font-mono text-3xl">
+              <span style={{"--value":15}}></span>
+            </span>
+            days
+          </div> 
+          <div className="flex flex-col">
+            <span className="countdown font-mono text-3xl">
+              <span style={{"--value":10}}></span>
+            </span>
+            hours
+          </div> 
+          <div className="flex flex-col">
+            <span className="countdown font-mono text-3xl">
+              <span style={{"--value":24}}></span>
+            </span>
+            min
+          </div> 
+          <div className="flex flex-col">
+            <span className="countdown font-mono text-3xl">
+              <span style={{"--value":49}}></span>
+            </span>
+            sec
+          </div>
+        </div>
+                          </div>
+                        </div>
+                         </div>
+                  })
+                }
+              </div> */}
+                <div className='lg:hidden block relative overflow-x-hidden  min-h-[300px] '>
+                {
+                  products2.map((product,n)=>{
+                        return    <div className='p-2 hover:shadow-md flex gap-4 bg-white  transition- duration-[400ms] ease-in  absolute' style={{transform:`translateX(-${divIndex*100}%)`,left:`${n*100}%`}}   key={n}>
+                        <div className='w-[40%] relative'>
                             <img src={product.image} alt="" className='' />
                             <div className='bg-[#FF2424] text-white uppercase px-4 py-1 absolute top-1 right-1'><h4>SALE</h4></div>
                         </div>

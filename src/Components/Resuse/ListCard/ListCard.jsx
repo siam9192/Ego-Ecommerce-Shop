@@ -11,23 +11,23 @@ const ListCard = ({product}) => {
 
 
     const handleNavigate = (id)=>{
-        navigate('/ego/product/id/details')
+        navigate(`/ego/product/${id}/details`)
     }
     return (
-        <div className='p-5 bg-white lg:flex font-rubik hover:cursor-pointer' onClick={()=>handleNavigate(89)}>
+        <div className='p-5 bg-white lg:flex font-rubik hover:cursor-pointer' onClick={()=>handleNavigate(product._id)}>
          <div className='lg:w-[30%]'>
             <img src={product.image} alt="" />
          </div>
          <div className='lg:w-[70%] space-y-3'>
-            <h1 className='text-2xl text-black'>{product.name}</h1>
+            <h1 className='text-2xl text-black'>{product.productName.slice(0,60)}{product.productName.length > 60 &&'..'}</h1>
             <Rating
          initialRating={4}
          emptySymbol={<TiStarHalfOutline></TiStarHalfOutline>}
          fullSymbol={<TiStarFullOutline></TiStarFullOutline>}
          readonly
        />
-       <h1 className='text-3xl text-black  '>${product.price}</h1>
-       <p className='text-[14px] text-gray-800'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam animi, maiores beatae exercitationem aliquam pariatur excepturi cumque odio vel voluptates non in sit eaque eveniet ipsam fugiat nemo, iusto ut minima ipsum? Maxime quis, harum tempora atque alias voluptates nostrum facere rerum provident cupiditate iste. Aliquid repellat a eius magnam quidem. Minus voluptatibus quasi, eveniet earum nisi quo dignissimos dolores.</p>
+       <h1 className='text-3xl text-black  '>${product.pricing.price}</h1>
+       <p className='text-[14px] text-gray-800'>{product.description.slice(0,140)}...</p>
        <div className={`w-full flex  items-center gap-2 text-black transition-all duration-300 ease-out `}>
                          <div className='bg-gray-200 hover:text-[#f22424] hover:cursor-pointer p-2 rounded-full text-xl'>
                                <PiShoppingBagOpenBold></PiShoppingBagOpenBold>

@@ -8,6 +8,7 @@ import Shop from '../Pages/Shop/Shop';
 import ProductDetails from '../Pages/ProductDetails/ProductDetails';
 import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
 import About from '../Pages/About/About';
+import AddProduct from '../Pages/AddProduct/AddProduct';
 
 const Routes = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const Routes = createBrowserRouter([
             {
                 path:'/about',
                 element:<About></About>
+            },
+            {
+                path:'/add-product',
+                element:<AddProduct></AddProduct>
             },
             {
                 path:'/ego/my-cart',

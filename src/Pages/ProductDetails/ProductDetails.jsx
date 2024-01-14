@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../../Components/Resuse/Container/Container';
 import { Rating } from '@mui/material';
 import { TiStarFullOutline, TiStarHalfOutline } from 'react-icons/ti';
@@ -6,12 +6,22 @@ import { IoCheckmarkOutline } from "react-icons/io5";
 import { FiHeart } from 'react-icons/fi';
 import ProductReviews from './ProductReviews';
 import DetailsSideComponents from './DetailsSideComponents';
+import AxiosBase from '../../Axios/AxiosBase';
+import { useParams } from 'react-router-dom';
 
 const ProductDetails = ({dangerouslySetInnerHTML}) => {
     const [ratting,setRatting] = useState(1)
     const [tabIndex,setTabIndex] = useState(0);
     const [cart,setCart] = useState(1);
+    const {id} = useParams();
     const tabs = ['description','more information','reviews','report'];
+    const [product,setProduct] = useState(null);
+  useEffect(()=>{
+    AxiosBase().get(`/product/${id}`)
+    .then(res =>{
+        setProduct(res.data);
+    })
+  },[])
 
     const handleTab = (index) =>{
         setTabIndex(index)
@@ -51,17 +61,17 @@ In Bangladesh, you can get the original MSI G244F E2 23.8 FHD Rapid IPS 180Hz Ga
                 <div className='lg:w-[80%] space-y-6'>
                    <div className='bg-white p-10 lg:flex '>
                     <div className='lg:w-[40%]'>
-                        <div><img src="https://magento2.magentech.com/themes/sm_ego/pub/media/catalog/product/cache/edad1ca0d9fba3902e48b2d7d42dae6e/i/p/ipad-pro-2019_1.jpg" alt="" /></div>
+                        <div><img src={product?.image} alt="" /></div>
                     </div>
                     <div className='lg:w-[60%] space-y-4'>
-                <h1 className='text-black text-xl'>Config product Apple 128GB - White</h1>
+                <h1 className='text-black text-xl'>{product?.productName}</h1>
                 <Rating
          initialRating={4}
          emptySymbol={<TiStarHalfOutline></TiStarHalfOutline>}
          fullSymbol={<TiStarFullOutline></TiStarFullOutline>}
          readonly
        />
-       <h1 className='text-2xl text-black font-semibold'>$600.00</h1>
+       <h1 className='text-2xl text-black font-semibold'>${product?.pricing?.price}.00</h1>
        <div className='flex items-center gap-3'><div className='flex items-center gap-2 text-green-600'><IoCheckmarkOutline> 
 </IoCheckmarkOutline> <h2 className='font-semibold'>In Stock</h2></div></div>
  
@@ -91,7 +101,7 @@ In Bangladesh, you can get the original MSI G244F E2 23.8 FHD Rapid IPS 180Hz Ga
                    
                 </div>
                 <div className={`${tabIndex === 0 ? 'block' : 'hidden'} bg-white py-10`}>
-                <div  dangerouslySetInnerHTML={{__html:text}}></div>
+                <div  dangerouslySetInnerHTML={{__html:product?.description}}></div>
                 </div>
                 <div className={`${tabIndex === 2 ? 'block' : 'hidden'} bg-white py-10`}>
                 <div>

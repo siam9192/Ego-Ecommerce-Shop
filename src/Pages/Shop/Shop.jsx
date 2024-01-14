@@ -11,89 +11,95 @@ import { CiFilter } from "react-icons/ci";
 import { LuFilter } from "react-icons/lu";
 import ColumnCard from '../../Components/Resuse/ProductCards/ColumnCard';
 import ListCard from '../../Components/Resuse/ListCard/ListCard';
+import AxiosBase from '../../Axios/AxiosBase';
 const Shop = () => {
     const [cardStyle,setCardStyle] = useState('grid');
-    const products = [{
-        name:'16 inch Macbook Pro ',
-        image:'https://i.ibb.co/ncZB27c/7.jpg',
-        price: 1500,
-        discount: 20,
-        category:'laptop',
-        brand:'apple',
-    },
-    {
-        name:"Stereo Headphone",
-        image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
-        price: 50,
-        discount: 5,
-        category:'headphone',
-        brand:'sony'
-    },
+    const [products,setProducts] = useState([]);
+//     const products = [{
+//         name:'16 inch Macbook Pro ',
+//         image:'https://i.ibb.co/ncZB27c/7.jpg',
+//         price: 1500,
+//         discount: 20,
+//         category:'laptop',
+//         brand:'apple',
+//     },
+//     {
+//         name:"Stereo Headphone",
+//         image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
+//         price: 50,
+//         discount: 5,
+//         category:'headphone',
+//         brand:'sony'
+//     },
    
-    {
-        name:"I phone 14 Pro",
-        image:' https://i.ibb.co/cw82wBs/Apple-i-Phone-14-Pro-jpg.webp',
-        price: 1500,
-        discount: 15,
-        category:'smartphone',
-        brand:'apple'
-    },
-    {
-        name:"Haier H43K6FG 43' FHD Android  LED Tv",
-        image:'https://i.ibb.co/PzwK11v/h43k6fg-01-500x500.jpg',
-        price: 400,
-        discount: 12,
-        category:'television',
-        brand:'haier'
-    },
-    {
-        name:'16 inch Macbook Pro ',
-        image:'https://i.ibb.co/ncZB27c/7.jpg',
-        price: 1500,
-        discount: 20,
-        category:'laptop',
-        brand:'apple',
-    },
-    {
-        name:'16 inch Macbook Pro ',
-        image:'https://i.ibb.co/ncZB27c/7.jpg',
-        price: 1500,
-        discount: 20,
-        category:'laptop',
-        brand:'apple',
-    },
+//     {
+//         name:"I phone 14 Pro",
+//         image:' https://i.ibb.co/cw82wBs/Apple-i-Phone-14-Pro-jpg.webp',
+//         price: 1500,
+//         discount: 15,
+//         category:'smartphone',
+//         brand:'apple'
+//     },
+//     {
+//         name:"Haier H43K6FG 43' FHD Android  LED Tv",
+//         image:'https://i.ibb.co/PzwK11v/h43k6fg-01-500x500.jpg',
+//         price: 400,
+//         discount: 12,
+//         category:'television',
+//         brand:'haier'
+//     },
+//     {
+//         name:'16 inch Macbook Pro ',
+//         image:'https://i.ibb.co/ncZB27c/7.jpg',
+//         price: 1500,
+//         discount: 20,
+//         category:'laptop',
+//         brand:'apple',
+//     },
+//     {
+//         name:'16 inch Macbook Pro ',
+//         image:'https://i.ibb.co/ncZB27c/7.jpg',
+//         price: 1500,
+//         discount: 20,
+//         category:'laptop',
+//         brand:'apple',
+//     },
     
-    {
-        name:"Stereo Headphone",
-        image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
-        price: 50,
-        discount: 5,
-        category:'headphone',
-        brand:'sony'
-    },
-    {
-        name:'16 inch Macbook Pro ',
-        image:'https://i.ibb.co/ncZB27c/7.jpg',
-        price: 1500,
-        discount: 20,
-        category:'laptop',
-        brand:'apple',
-    },
-    {
-        name:"Stereo Headphone",
-        image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
-        price: 50,
-        discount: 5,
-        category:'headphone',
-        brand:'sony'
-    },
+//     {
+//         name:"Stereo Headphone",
+//         image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
+//         price: 50,
+//         discount: 5,
+//         category:'headphone',
+//         brand:'sony'
+//     },
+//     {
+//         name:'16 inch Macbook Pro ',
+//         image:'https://i.ibb.co/ncZB27c/7.jpg',
+//         price: 1500,
+//         discount: 20,
+//         category:'laptop',
+//         brand:'apple',
+//     },
+//     {
+//         name:"Stereo Headphone",
+//         image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
+//         price: 50,
+//         discount: 5,
+//         category:'headphone',
+//         brand:'sony'
+//     },
    
    
-]
+// ]
 
 useEffect(()=>{
     setCardStyle(localStorage.getItem('ego-card-style') || 'grid')
-})
+    AxiosBase().get('/products')
+    .then(res=>{
+        setProducts(res.data)
+    })
+},[])
 
 const handleCardStyle = (value)=> {
     setCardStyle(value)

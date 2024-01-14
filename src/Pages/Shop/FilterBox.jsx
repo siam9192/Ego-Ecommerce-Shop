@@ -16,7 +16,7 @@ const FilterBox = () => {
                 <h2 className='text-black  pt-3'>Category</h2>
                 <div className='space-y-1'>
                     {categories.slice(0,4).map((item,index)=>{
-                        return <div className='flex items-center gap-2' key={index}><input type="checkbox" className='w-3 h-3' /> <p>{item}</p></div>
+                        return <div className='flex items-center gap-2' key={index}><input type="checkbox" className='w-3 h-3 accent-black' /> <p>{item}</p></div>
                     })}
                 </div>
             </div>
@@ -31,7 +31,7 @@ const FilterBox = () => {
                 <h2 className='text-black  pt-3'>Manufacture</h2>
                 <div className='space-y-1'>
                     {categories.slice(0,4).map((item,index)=>{
-                        return <div className='flex items-center gap-2'><input type="checkbox" className='w-3 h-3' /> <p>{item}</p></div>
+                        return <div className='flex items-center gap-2'><input type="checkbox" className='w-3 h-3 accent-black' /> <p>{item}</p></div>
                     })}
                 </div>
             </div>

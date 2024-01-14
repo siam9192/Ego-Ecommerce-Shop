@@ -23,14 +23,15 @@ const Banner = () => {
         setBannerIndex(prev);
     }
     useEffect(()=>{
-        setInterval(()=>{
+     const interval =  setInterval(()=>{
             if(bannerIndex+1 === bannerImages.length){
                 setBannerIndex(0);
                 return;
             }
             setBannerIndex(bannerIndex+1);
-           
+          
         },5000)
+        return ()=>clearInterval(interval)
         
     },[bannerIndex])
     

@@ -10,7 +10,8 @@ const Services = () => {
     return (
         <div>
             <Container>
-                <div className='flex lg:flex-row flex-col lg:flex-wrap  justify-between space-y-4 lg:px-0 px-2 font-rubik'>
+                <div className='flex md:flex-row flex-col md:flex-wrap  justify-between space-y-4 lg:px-0 px-2 font-rubik  '>
+             
                 
                 <div className='flex items-center gap-3'>
                         <div className='p-4 bg-gray-200 rounded-full text-3xl text-[#FF385c]'>
@@ -51,7 +52,7 @@ const Services = () => {
                 </div>
                 <div className='py-6 flex lg:flex-row flex-col lg:justify-between gap-3 lg:items-center'>
                 {
-                   images.map((item,index)=> <Link><img src={item} alt="" className='w-full' key={index}/></Link>)
+                   images.map((item,index)=> <Link><img src={item} alt="" className='' key={index}/></Link>)
                 }
                 </div>
             </Container>

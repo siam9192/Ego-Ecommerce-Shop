@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Container from '../Container/Container';
 import { FiHeart, FiUser } from "react-icons/fi";
 import { PiShoppingBagOpenBold } from "react-icons/pi";
 import { GiHamburgerMenu } from "react-icons/gi";
+import ResponsiveNavbar from './ResponsiveNavbar';
 
 const Navbar = () => {
 //   Hooks
 const [departmentsMenu,setDepartmentsMenu] = useState(false)
 const [accountBar,setAccountBar]  = useState(false);
 const [cardBar,setCartBar] = useState(false);
+const [isResponsiveNavbar,setIsResponsiveNavbar] = useState(false);
+
+const {pathname} = useLocation()
 
     const categories = ["Electronics", "Clothing & Fashion", "Home & Furniture", "Beauty & Personal Care", "Books & Media", "Sports & Outdoors", "Toys & Games", "Automotive", "Health & Wellness", "Appliances", "Jewelry & Accessories", "Pet Supplies", "Office & Stationery", "Gourmet Food & Grocery", "Baby & Kids", "Travel & Luggage", "Crafts & Hobbies", "Gifts & Occasions", "Art & Collectibles", "Fitness & Exercise", "Garden & Outdoor", "Tech Accessories", "Musical Instruments", "Party Supplies", "Smart Home", "Kitchen & Dining", "DIY & Tools", "Virtual Reality", "Watches"];
     const departments = ["Electronics", "Clothing", "Home & Furniture", "Beauty & Personal Care", "Books & Media", "Sports & Outdoors", "Toys & Games", "Automotive", "Health & Wellness", "Appliances", "Jewelry & Accessories", "Pet Supplies", "Office & Stationery", "Gourmet Food & Grocery", "Baby & Kids", "Travel & Luggage", "Crafts & Hobbies", "Gifts & Occasions", "Art & Collectibles", "Fitness & Exercise", "Garden & Outdoor", "Tech Accessories", "Musical Instruments", "Party Supplies", "Smart Home", "Kitchen & Dining", "DIY & Tools", "Virtual Reality", "Watches"];
@@ -19,12 +23,20 @@ const handleDepartMentsMenu = (value)=>{
 setDepartmentsMenu(value)
 }
 
+const handleResponsiveNavbar = (value)=>{
+  setIsResponsiveNavbar(value)
+}
+
 const handleAccountBar = ()=>{
   setAccountBar(!accountBar)
 }
 const handleCard =() =>{
   setCartBar(!cardBar)
 }
+
+useEffect (()=>{
+  setIsResponsiveNavbar(false)
+},[pathname])
 
     return (
         <div className='font-rubik'>
@@ -44,7 +56,8 @@ const handleCard =() =>{
            <div className='py-5 lg:px-0 px-2 bg-white lg:border-b  border-gray-200'>
            <Container>
                 <div className='flex justify-between items-center '>
-                  <div className="text-2xl text-black lg:hidden block">
+                  <div className="text-2xl text-black lg:hidden block" onClick={()=>{setIsResponsiveNavbar(true)
+                  console.log(1111)}}>
                   <GiHamburgerMenu></GiHamburgerMenu>
                   </div>
                  <img src="https://magento2.magentech.com/themes/sm_ego/pub/media/logomobile/default/Logo.png" alt="" />
@@ -102,6 +115,7 @@ const handleCard =() =>{
                         <Link>New Arrivals</Link>
                         <Link>Contact Us</Link>
                         <Link to='/about'>About Us</Link>
+                        <Link to='/add-product'>Add Product</Link>
                     </ul>
                 </nav>
               
@@ -112,6 +126,7 @@ const handleCard =() =>{
                 
             </Container>
            </div>
+           <ResponsiveNavbar isResponsiveNavbar={isResponsiveNavbar} handler = {handleResponsiveNavbar}></ResponsiveNavbar>
         </div>
 
     );
