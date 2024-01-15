@@ -17,6 +17,20 @@ const {pathname} = useLocation()
 
     const categories = ["Electronics", "Clothing & Fashion", "Home & Furniture", "Beauty & Personal Care", "Books & Media", "Sports & Outdoors", "Toys & Games", "Automotive", "Health & Wellness", "Appliances", "Jewelry & Accessories", "Pet Supplies", "Office & Stationery", "Gourmet Food & Grocery", "Baby & Kids", "Travel & Luggage", "Crafts & Hobbies", "Gifts & Occasions", "Art & Collectibles", "Fitness & Exercise", "Garden & Outdoor", "Tech Accessories", "Musical Instruments", "Party Supplies", "Smart Home", "Kitchen & Dining", "DIY & Tools", "Virtual Reality", "Watches"];
     const departments = ["Electronics", "Clothing", "Home & Furniture", "Beauty & Personal Care", "Books & Media", "Sports & Outdoors", "Toys & Games", "Automotive", "Health & Wellness", "Appliances", "Jewelry & Accessories", "Pet Supplies", "Office & Stationery", "Gourmet Food & Grocery", "Baby & Kids", "Travel & Luggage", "Crafts & Hobbies", "Gifts & Occasions", "Art & Collectibles", "Fitness & Exercise", "Garden & Outdoor", "Tech Accessories", "Musical Instruments", "Party Supplies", "Smart Home", "Kitchen & Dining", "DIY & Tools", "Virtual Reality", "Watches"];
+    const brands = [
+      "Apple",
+      "Samsung",
+      "Huawei",
+      "Xiaomi",
+      "OnePlus",
+      "Realme",
+      "Oppo",
+      "Sony",
+      "Hp",
+      "Dell",
+      "Google"
+    ];
+    
 
 // element control functions
 const handleDepartMentsMenu = (value)=>{
@@ -102,7 +116,7 @@ useEffect (()=>{
                   <div className='p-4 px-14  bg-[#FE2424] text-white tex-xl hover:cursor-pointer' onMouseEnter={()=>handleDepartMentsMenu(true)} >All DEPARTMENTS</div>
                   <div className={`absolute left-0 py-2 flex flex-col w-full max-h-[500px]  border overflow-y-auto bg-white text-gray-700 z-40 ${departmentsMenu?'block' : 'hidden'}`} >
                     {
-                        departments.map((department,index)=>{
+                        brands.map((department,index)=>{
                         return <Link className='p-2 hover:bg-gray-200 hover:border-l-4 hover:border-l-[#FE2424] ' key={index}>{department}</Link>
                         })
                     }

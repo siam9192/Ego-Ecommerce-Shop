@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '../../Components/Resuse/Container/Container';
+import UserAuth from '../../Authentication/UserAuth/UserAuth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+  const {state} = useLocation();
+    const navigate = useNavigate();
+    const {login} = UserAuth();
+  const [error,setError] = useState('')
+  const handleSubmit = (e)=>{
+    
+    e.preventDefault();
+    setError('')
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+   login(email,password)
+   .then(res=>{
+    form.reset()
+   if(state){
+  navigate(state)
+   }
+   else{
+    navigate('/')
+   }
+   
+   })
+  
+  }
     return (
         <div className='py-5 font-rubik'>
             <Container>
@@ -11,14 +37,14 @@ const SignIn = () => {
                     <div className='bg-[#f8f9fa] p-5'>
                       <h1 className='text-black font-semibold uppercase pb-3 border-b'>Registered Customers</h1>
                       <p className='text-black py-3'>If you have an account, sign in with your email address.</p>
-                      <form className='space-y-6 pt-3'>
+                      <form className='space-y-6 pt-3' onSubmit={handleSubmit}>
                    <div>
                    <h3 className='pb-2 text-balance font-semibold'>Email   <span className='text-red-500'> *</span></h3>
-                        <input type="text" name='email' className='w-full p-2 bg-white border border-gray-800 outline-node outline-none'/>
+                        <input type="email" name='email' className='w-full p-2 bg-white border border-gray-800 outline-node outline-none' required/>
                    </div>
                      <div>
                         <h3 className='pb-2 text-balance font-semibold'>Password<span className='text-red-500'> *</span></h3>
-                     <input type="text" name='password' className='w-full p-2 bg-white border border-gray-800 outline-none'/>
+                     <input type="text" name='password' className='w-full p-2 bg-white border border-gray-800 outline-none' required/>
                      </div>
                      <div className='flex items-center text-black gap-3'>
                         <input type="checkbox" className='w-5 h-5'/><p className='text-black '>Show Password</p>

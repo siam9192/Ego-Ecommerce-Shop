@@ -1,12 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const FilterBox = () => {
+const FilterBox = ({handleSearchCategories,handleSearchManufactures}) => {
     const navigate = useNavigate();
-    const categories = ["Electronics", "Clothing & Fashion", "Home & Furniture", "Beauty & Personal Care"];
+   
+    const categories = [
+        "Smartphones",
+        "Laptops",
+        "Wearables",
+        "Audio and Headphones",
+        "Gaming",
+        "Home Electronics",
+        "Cameras",
+        "Networking and Internet Devices",
+        "Drones and Robotics"
+      ];
+      const brands = [
+        "Apple",
+        "Samsung",
+        "Huawei",
+        "Xiaomi",
+        "OnePlus",
+        "Realme",
+        "Oppo",
+        "Sony",
+        "Hp",
+        "Dell",
+        "Google"
+      ];
+
     const handleNavigate = (id)=>{
         navigate()
     }
+
+   
     return (
         <div className='font-rubik space-y-6 '>
             <div>
@@ -16,7 +43,7 @@ const FilterBox = () => {
                 <h2 className='text-black  pt-3'>Category</h2>
                 <div className='space-y-1'>
                     {categories.slice(0,4).map((item,index)=>{
-                        return <div className='flex items-center gap-2' key={index}><input type="checkbox" className='w-3 h-3 accent-black' /> <p>{item}</p></div>
+                        return <div className='flex items-center gap-2' key={index}><input type="checkbox" value={item} className='w-3 h-3 accent-black' onChange={handleSearchCategories}/> <p>{item}</p></div>
                     })}
                 </div>
             </div>
@@ -30,8 +57,8 @@ const FilterBox = () => {
             <div className='space-y-2  py-2'>
                 <h2 className='text-black  pt-3'>Manufacture</h2>
                 <div className='space-y-1'>
-                    {categories.slice(0,4).map((item,index)=>{
-                        return <div className='flex items-center gap-2'><input type="checkbox" className='w-3 h-3 accent-black' /> <p>{item}</p></div>
+                    {brands.map((item,index)=>{
+                        return <div className='flex items-center gap-2'><input type="checkbox" value={item} className='w-3 h-3 accent-black' onChange={handleSearchManufactures}/> <p>{item}</p></div>
                     })}
                 </div>
             </div>

@@ -8,7 +8,7 @@ import ProductReviews from './ProductReviews';
 import DetailsSideComponents from './DetailsSideComponents';
 import AxiosBase from '../../Axios/AxiosBase';
 import { useParams } from 'react-router-dom';
-
+import UserAuth from '../../Authentication/UserAuth/UserAuth'
 const ProductDetails = ({dangerouslySetInnerHTML}) => {
     const [ratting,setRatting] = useState(1)
     const [tabIndex,setTabIndex] = useState(0);
@@ -16,6 +16,10 @@ const ProductDetails = ({dangerouslySetInnerHTML}) => {
     const {id} = useParams();
     const tabs = ['description','more information','reviews','report'];
     const [product,setProduct] = useState(null);
+
+
+  const {user} =  UserAuth();
+
   useEffect(()=>{
     AxiosBase().get(`/product/${id}`)
     .then(res =>{
@@ -51,6 +55,24 @@ The typical flicker rate of generic monitor displays is around 200 times per sec
 Buy MSI G244F E2 23.8 inch FHD Rapid IPS 180Hz Gaming Monitor Star Tech
 
 In Bangladesh, you can get the original MSI G244F E2 23.8 FHD Rapid IPS 180Hz Gaming Monitor From Star Tech. We have a large collection of the MSI Monitor to purchase for your Desktop PC. Order Online Or Visit your Nearest Star Tech Shop to get yours at the lowest price. MSI G244F E2 23.8 FHD Rapid IPS 180Hz Gaming Monitor comes with 03 Years of warranty.`
+
+
+const addToCart = ()=>{
+    const newCart = {
+        product_id:product._id,
+        quantity:cart,
+        email:user.email,
+        image:product.image,
+        name:product.productName,
+        price: product.pricing.price,
+        discount:product.pricing.discount
+    }
+    console.log(newCart)
+AxiosBase().post('/add-to-cart',newCart)
+.then((res)=>{
+    alert('Add to cart')
+})
+}
     return (
         <div className='bg-[#f5f5f5] py-10 font-rubik'>
           <Container>
@@ -84,7 +106,7 @@ In Bangladesh, you can get the original MSI G244F E2 23.8 FHD Rapid IPS 180Hz Ga
             <input type="text" value={cart} className='w-32 border p-3 text-center text-black outline-none' readOnly />
             <button className='px-4 py-2 text-white text-xl bg-black' onClick={decreaseCart}>-</button>
         </div>
-        <div className={`px-4 py-3 bg-[#ff2424] text-white uppercase hover:cursor-pointer`} >Add to cart</div>
+        <div className={`px-4 py-3 bg-[#ff2424] text-white uppercase hover:cursor-pointer`} onClick={addToCart}>Add to cart</div>
         <div className={`px-4 py-3 bg-black text-xl text-white uppercase hover:cursor-pointer`} ><FiHeart></FiHeart></div>
     
     </div>

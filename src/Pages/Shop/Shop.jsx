@@ -12,100 +12,72 @@ import { LuFilter } from "react-icons/lu";
 import ColumnCard from '../../Components/Resuse/ProductCards/ColumnCard';
 import ListCard from '../../Components/Resuse/ListCard/ListCard';
 import AxiosBase from '../../Axios/AxiosBase';
+import { useQuery } from '@tanstack/react-query';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 const Shop = () => {
     const [cardStyle,setCardStyle] = useState('grid');
-    const [products,setProducts] = useState([]);
-//     const products = [{
-//         name:'16 inch Macbook Pro ',
-//         image:'https://i.ibb.co/ncZB27c/7.jpg',
-//         price: 1500,
-//         discount: 20,
-//         category:'laptop',
-//         brand:'apple',
-//     },
-//     {
-//         name:"Stereo Headphone",
-//         image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
-//         price: 50,
-//         discount: 5,
-//         category:'headphone',
-//         brand:'sony'
-//     },
-   
-//     {
-//         name:"I phone 14 Pro",
-//         image:' https://i.ibb.co/cw82wBs/Apple-i-Phone-14-Pro-jpg.webp',
-//         price: 1500,
-//         discount: 15,
-//         category:'smartphone',
-//         brand:'apple'
-//     },
-//     {
-//         name:"Haier H43K6FG 43' FHD Android  LED Tv",
-//         image:'https://i.ibb.co/PzwK11v/h43k6fg-01-500x500.jpg',
-//         price: 400,
-//         discount: 12,
-//         category:'television',
-//         brand:'haier'
-//     },
-//     {
-//         name:'16 inch Macbook Pro ',
-//         image:'https://i.ibb.co/ncZB27c/7.jpg',
-//         price: 1500,
-//         discount: 20,
-//         category:'laptop',
-//         brand:'apple',
-//     },
-//     {
-//         name:'16 inch Macbook Pro ',
-//         image:'https://i.ibb.co/ncZB27c/7.jpg',
-//         price: 1500,
-//         discount: 20,
-//         category:'laptop',
-//         brand:'apple',
-//     },
+    const [searchCategories,setSearchCategories] = useState([]);
+    const [searchManufacture,setSearchManufacture] = useState([]);
+    const navigate = useNavigate();
+   const searchParams = useSearchParams();
+    const {data:products=[],refetch,isLoading} = useQuery({
+        queryKey:['products'],
+        queryFn:async()=>{
+            const res = await AxiosBase().get(`/products?key=""&category=${searchParams[0].get('category') || ''}&brands=${searchParams[0].get('brands')||''}`);
+            return res.data
+        }
+    })
     
-//     {
-//         name:"Stereo Headphone",
-//         image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
-//         price: 50,
-//         discount: 5,
-//         category:'headphone',
-//         brand:'sony'
-//     },
-//     {
-//         name:'16 inch Macbook Pro ',
-//         image:'https://i.ibb.co/ncZB27c/7.jpg',
-//         price: 1500,
-//         discount: 20,
-//         category:'laptop',
-//         brand:'apple',
-//     },
-//     {
-//         name:"Stereo Headphone",
-//         image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
-//         price: 50,
-//         discount: 5,
-//         category:'headphone',
-//         brand:'sony'
-//     },
-   
-   
-// ]
 
 useEffect(()=>{
     setCardStyle(localStorage.getItem('ego-card-style') || 'grid')
-    AxiosBase().get('/products')
-    .then(res=>{
-        setProducts(res.data)
+    // AxiosBase().get('/products')
+    // .then(res=>{
+    //     setProducts(res.data)
+    // })
+
+   let categoryParams = '';
+   let brandParams = '';
+    searchCategories.forEach(item=>{
+        categoryParams = categoryParams + '--' + item
     })
-},[])
+    
+    searchManufacture.forEach(item=>{
+        brandParams = brandParams + '--' + item
+    })
+  if(categoryParams||brandParams){
+    navigate(`/ego/shop?keyword=''&category=${categoryParams}&brands=${brandParams}`)
+    refetch()
+  }
+},[searchCategories,searchManufacture])
+const handleSearchCategories = (e)=>{
+    if(e.target.checked){
+        setSearchCategories([...searchCategories,e.target.value])
+    }
+    else {
+        const array = searchCategories;
+        const index = array.indexOf(e.target.value);
+        array.splice(index,1)
+        setSearchCategories(array)
+    }
+}
+const handleSearchManufactures = (e)=>{
+    if(e.target.checked){
+        setSearchManufacture([...searchManufacture,e.target.value.toLowerCase()])
+    }
+    else {
+        const array = searchManufacture;
+        const index = array.indexOf(e.target.value.toLowerCase());
+        array.splice(index,1)
+        setSearchManufacture(array)
+    }
+}
 
 const handleCardStyle = (value)=> {
     setCardStyle(value)
     localStorage.setItem('ego-card-style',value)
 };
-
+// console.log(searchManufacture)
 
     return (
         <div className='bg-[#f5f5f5] py-10 font-rubik'>
@@ -114,7 +86,7 @@ const handleCardStyle = (value)=> {
                     <p className='text-gray-700 pb-5'>{'Home > Shop'}</p>
                     <div className='lg:flex gap-5 '>
                     <div className='w-[20%] lg:block hidden'>
-                     <FilterBox></FilterBox>
+                     <FilterBox handleSearchCategories = {handleSearchCategories} handleSearchManufactures={handleSearchManufactures}></FilterBox>
                     </div>
                     <div className='lg:w-[80%] lg:px-0 px-2'>
                         <h1 className='text-black text-3xl'>SMARTPHONE</h1>
@@ -140,6 +112,10 @@ const handleCardStyle = (value)=> {
                            </select>
                            <div><FaArrowUpLong></FaArrowUpLong></div>
                             </div>
+                        </div>
+
+                        <div className={`${isLoading ? 'block min-h-[280px]' : 'hidden' } text-center py-32 w-full bg-white`}>
+                        <span className="loading loading-ring loading-lg text-[#ff2424]"></span>
                         </div>
                         {/* products grid */}
                        {

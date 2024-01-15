@@ -8,18 +8,18 @@ import { Link, useParams } from 'react-router-dom';
 
 const ColumnCard = ({product,index}) => {
     const [hover,setHover] = useState(false)
-    const {id} = useParams()
+    
     const handleHover = (value)=>{
          setHover(value)
     }
     return (
-        <Link to={`/ego/product/${id}/details`}>
+        <Link to={`/ego/product/${product._id}/details`}>
           <div className={`flex flex-col space-y-3 font-rubik p-5 hover:shadow-lg relative h-full overflow-hidden bg-white `}  onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
            <div className='flex justify-center items-center flex-grow'>
            <img src={product.image} alt="" className='w-60'/>
            </div>
             <h1 className='text-xl text-gary-900 text-center'>{product.productName.slice(0,60)}{product.productName.length > 60 &&'..'}</h1>
-            <div className={`text-xl text-[#FF385c] flex justify-center items-center ${hover?'opacity-0':''}`}>
+            <div className={`text- text-[#FF385c] flex justify-center items-center ${hover?'opacity-0':''}`}>
                           <Rating
          initialRating={4}
          emptySymbol={<TiStarHalfOutline></TiStarHalfOutline>}
