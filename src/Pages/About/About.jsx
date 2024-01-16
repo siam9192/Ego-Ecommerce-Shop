@@ -49,9 +49,9 @@ const About = () => {
                          <div className='py-2 px-4 space-y-4 h-full overflow-auto'>
                             {
                                 faqs.map((item,index)=>{
-                                 return   <div className='py-2 px-2 bg-gray-100 space-y-2' onClick={()=>handleFaq(index)} key={index}>
+                                 return   <div className='py-2 px-2 bg-gray-100 space-y-2 h-fit transition-[height] duration-300 ease-in' onClick={()=>handleFaq(index)} key={index}>
                                         <h1 className='text-black '>{index+1}.{item.question}</h1>
-                                        <p className={`${faqIndex === index ?'block' : 'hidden'} transition-all duration-400 ease-in`}>{item.answer}</p>
+                                        <p className={`${faqIndex === index ?'block' : 'hidden'} `}>{item.answer}</p>
                                     </div>
                                 })
                             }

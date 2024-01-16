@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Container from '../Container/Container';
 import { FiHeart, FiUser } from "react-icons/fi";
 import { PiShoppingBagOpenBold } from "react-icons/pi";
@@ -12,11 +12,21 @@ const [departmentsMenu,setDepartmentsMenu] = useState(false)
 const [accountBar,setAccountBar]  = useState(false);
 const [cardBar,setCartBar] = useState(false);
 const [isResponsiveNavbar,setIsResponsiveNavbar] = useState(false);
-
+const navigate = useNavigate()
 const {pathname} = useLocation()
 
-    const categories = ["Electronics", "Clothing & Fashion", "Home & Furniture", "Beauty & Personal Care", "Books & Media", "Sports & Outdoors", "Toys & Games", "Automotive", "Health & Wellness", "Appliances", "Jewelry & Accessories", "Pet Supplies", "Office & Stationery", "Gourmet Food & Grocery", "Baby & Kids", "Travel & Luggage", "Crafts & Hobbies", "Gifts & Occasions", "Art & Collectibles", "Fitness & Exercise", "Garden & Outdoor", "Tech Accessories", "Musical Instruments", "Party Supplies", "Smart Home", "Kitchen & Dining", "DIY & Tools", "Virtual Reality", "Watches"];
-    const departments = ["Electronics", "Clothing", "Home & Furniture", "Beauty & Personal Care", "Books & Media", "Sports & Outdoors", "Toys & Games", "Automotive", "Health & Wellness", "Appliances", "Jewelry & Accessories", "Pet Supplies", "Office & Stationery", "Gourmet Food & Grocery", "Baby & Kids", "Travel & Luggage", "Crafts & Hobbies", "Gifts & Occasions", "Art & Collectibles", "Fitness & Exercise", "Garden & Outdoor", "Tech Accessories", "Musical Instruments", "Party Supplies", "Smart Home", "Kitchen & Dining", "DIY & Tools", "Virtual Reality", "Watches"];
+    const categories = [
+      "Smartphones",
+      "Laptops",
+      "Wearables",
+      "Audio and Headphones",
+      "Gaming",
+      "Home Electronics",
+      "Cameras",
+      "Networking and Internet Devices",
+      "Drones and Robotics"
+    ];
+    
     const brands = [
       "Apple",
       "Samsung",
@@ -52,6 +62,14 @@ useEffect (()=>{
   setIsResponsiveNavbar(false)
 },[pathname])
 
+const handleSubmit = (e)=>{
+  e.preventDefault();
+  const form = e.target;
+  const category = form.category.value;
+  const keyword = form.keyword.value;
+ 
+}
+// console.log(accountBar)
     return (
         <div className='font-rubik'>
          <div className='lg:block hidden py-3 bg-[#e7e7e7] w-full'>
@@ -75,8 +93,8 @@ useEffect (()=>{
                   <GiHamburgerMenu></GiHamburgerMenu>
                   </div>
                  <img src="https://magento2.magentech.com/themes/sm_ego/pub/media/logomobile/default/Logo.png" alt="" />
-                 <div className='lg:flex items-center px-2  border border-gray-200 rounded-full lg:block hidden'>
-                    <select name="" id="" className='bg-transparent p-3 border-r border-gray-300'>
+                 <form className='lg:flex items-center px-2  border border-gray-200 rounded-full lg:block hidden' onSubmit={handleSubmit}>
+                    <select name="category" id="" className='bg-transparent p-3 border-r border-gray-300' o>
                       {
                         categories.map(item =>{
                            return <option value={item} key={item}>{item}</option>
@@ -84,9 +102,9 @@ useEffect (()=>{
                       }
                     </select>
 
-                 <input type="text" placeholder='Search products'  className=' w-[500px] py-3 px-2 text-black bg-transparent border-none outline-none' />
+                 <input type="text" name='keyword' placeholder='Search products'  className=' w-[500px] py-3 px-2 text-black bg-transparent border-none outline-none' />
                  <button className='text-white px-6 py-2 rounded-full bg-[#FE2424]'>Search</button>
-                 </div>
+                 </form>
                  <div className='flex items-center gap-4'>
              <div className='hover:cursor-pointer' onMouseEnter={handleAccountBar} onMouseLeave={handleAccountBar}>
              <FiUser className='text-2xl text-black hover:text-[red] lg:block hidden'></FiUser>

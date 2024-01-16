@@ -21,9 +21,9 @@ const Home = () => {
              <img src="/images/image/Banner1.jpg" alt="" />
             </div>
             </Container>
-            {/* <div className='py-10 space-y-10 bg-gray-200 lg:px-0 px-2'>
-            <TopSelling></TopSelling>
-            <FeaturedBrand></FeaturedBrand>
+             <div className='py-10 space-y-10 bg-gray-200 lg:px-0 px-2'>
+            {/* <TopSelling></TopSelling> */}
+            {/* <FeaturedBrand></FeaturedBrand> */}
             <BestSelling></BestSelling>
             <Container>
             <div className='py-6'>
@@ -32,7 +32,7 @@ const Home = () => {
             </Container>
             <RecomendedProducts></RecomendedProducts>
             <ShopByBrands></ShopByBrands>
-            </div> */}
+            </div> 
         </div>
     );
 }

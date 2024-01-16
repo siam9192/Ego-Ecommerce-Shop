@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Container from '../../Components/Resuse/Container/Container';
 import UserAuth from '../../Authentication/UserAuth/UserAuth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
   const {state} = useLocation();
@@ -57,7 +57,7 @@ const SignIn = () => {
                     <div className='bg-[#f8f9fa] p-5'>
                       <h1 className='text-black font-semibold uppercase pb-3 border-b'>New Customers</h1>
                       <p className='text-black py-3'>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p>
-                    <button className='bg-gray-700 text-white py-2 px-4'>Register</button>
+                   <Link to='/ego/account/register'> <button className='bg-gray-700 text-white py-2 px-4'>Register</button></Link>
                     </div>
                    
                 </div>

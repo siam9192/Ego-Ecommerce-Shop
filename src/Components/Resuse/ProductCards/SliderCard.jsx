@@ -16,7 +16,7 @@ const SliderCard = ({product,index,divIndex}) => {
            <div className='flex justify-center items-center flex-grow'>
            <img src={product.image} alt="" className='w-60'/>
            </div>
-            <h1 className='text-xl text-gary-900 text-center'>{product.name}</h1>
+            <h1 className='text-xl text-gary-900 text-center'>{product.productName.slice(0,40)}</h1>
             <div className={`text-xl text-[#FF385c] flex justify-center items-center ${hover?'opacity-0':''}`}>
                           <Rating
          initialRating={4}
@@ -25,7 +25,7 @@ const SliderCard = ({product,index,divIndex}) => {
          readonly
        />
  </div>
- <h1 className={`text-xl text-black text-center ${hover?'opacity-0':''}`}>${product.price}</h1>
+ <h1 className={`text-xl text-black text-center ${hover?'opacity-0':''}`}>${product.pricing.price}</h1>
  <div className={`w-full flex justify-center items-center gap-2 text-black absolute transition-all duration-300 ease-out ${!hover?'-bottom-9' : 'bottom-8'}`}>
                          <div className='bg-gray-200 p-2 rounded-full text-xl'>
                                <PiShoppingBagOpenBold></PiShoppingBagOpenBold>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
 
-const FilterBox = ({handleSearchCategories,handleSearchManufactures,handleMinPrice,handleMaxPrice}) => {
-    const navigate = useNavigate();
+const ResponsiveFilterBox = ({handleResponsiveFilterBox,isResponsiveFilterBox,handleSearchCategories,handleSearchManufactures,handleMinPrice,handleMaxPrice}) => {
+    const boxRef = useRef();
+    // const navigate = useNavigate();
    
     const categories = [
         "Smartphones",
@@ -28,21 +28,33 @@ const FilterBox = ({handleSearchCategories,handleSearchManufactures,handleMinPri
         "Dell",
         "Google"
       ];
-
-    const handleNavigate = (id)=>{
-        navigate()
-    }
-
-   
+      const handleOutsideClick = (event) => {
+        if (boxRef.current && !boxRef.current.contains(event.target)) {
+          // Click occurred outside the component, close it
+         handleResponsiveFilterBox(false)
+        }
+      };
+    
+      useEffect(() => {
+        // Attach the event listener when the component mounts
+        document.addEventListener('mousedown', handleOutsideClick);
+    
+        // Clean up the event listener when the component unmounts
+        return () => {
+          document.removeEventListener('mousedown', handleOutsideClick);
+        };
+      }, []);
     return (
-        <div className='font-rubik space-y-6 '>
+        <div className={`w-full h-full bg-gray-600 bg-opacity-25 fixed top-0 z-40 ${!isResponsiveFilterBox ? '-left-[200%]' : 'left-0'} transition-all duration-200 lg:hidden `}>
+            <div className='min-w-[300px] max-w-[300px] bg-white opacity-100 h-full z-50 py-5 p-2 font-rubik transition-all duration-300 max-h-[100vh] overflow-y-auto' ref={boxRef}>
+            <div className='font-rubik space-y-6 '>
             <div>
             <div className='py-3 px-4 bg-[#FF2424] text-white uppercase text-xl '>SHOP by</div>
             <div className='bg-white pb-4 px-4 space-y-3'>
             <div className='space-y-2 '>
                 <h2 className='text-black  pt-3'>Category</h2>
                 <div className='space-y-1'>
-                    {categories.map((item,index)=>{
+                    {categories.slice(0,4).map((item,index)=>{
                         return <div className='flex items-center gap-2' key={index}><input type="checkbox" value={item.toLowerCase()} className='w-3 h-3 accent-black' onChange={handleSearchCategories}/> <p>{item}</p></div>
                     })}
                 </div>
@@ -64,11 +76,12 @@ const FilterBox = ({handleSearchCategories,handleSearchManufactures,handleMinPri
             </div>
             </div>
             </div>
-            <div>
-                <img src="/images/image/sidebar1.jpg" alt="" />
-            </div>
+            
+        </div>
+                </div>
+            
         </div>
     );
 }
 
-export default FilterBox;
+export default ResponsiveFilterBox;

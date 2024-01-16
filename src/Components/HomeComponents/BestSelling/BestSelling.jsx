@@ -1,81 +1,91 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../../Resuse/Container/Container';
 import ColumnCard from '../../Resuse/ProductCards/ColumnCard';
 import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 import SliderCard from '../../Resuse/ProductCards/SliderCard';
+import AxiosBase from '../../../Axios/AxiosBase';
 const BestSelling = () => {
     const [divIndex,setDivIndex] = useState(0);
-    const products = [{
-        name:'16 inch Macbook Pro ',
-        image:'https://i.ibb.co/ncZB27c/7.jpg',
-        price: 1500,
-        discount: 20,
-        category:'laptop',
-        brand:'apple',
-    },
-    // {
-    //     name:"Addyvero Woman's  Dress",
-    //     image:'https://i.ibb.co/0J4BMxG/81-Jbx3rpj4-L-AC-SX569.jpg',
-    //     price: 80,
-    //     discount: 5,
-    //     category:'dress',
-    //     brand:null,
+    const [products,setProducts] = useState([])
+//     const products = [{
+//         name:'16 inch Macbook Pro ',
+//         image:'https://i.ibb.co/ncZB27c/7.jpg',
+//         price: 1500,
+//         discount: 20,
+//         category:'laptop',
+//         brand:'apple',
+//     },
+//     // {
+//     //     name:"Addyvero Woman's  Dress",
+//     //     image:'https://i.ibb.co/0J4BMxG/81-Jbx3rpj4-L-AC-SX569.jpg',
+//     //     price: 80,
+//     //     discount: 5,
+//     //     category:'dress',
+//     //     brand:null,
 
-    // },
-    {
-        name:"Stereo Headphone",
-        image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
-        price: 50,
-        discount: 5,
-        category:'headphone',
-        brand:'sony'
-    },
+//     // },
+//     {
+//         name:"Stereo Headphone",
+//         image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
+//         price: 50,
+//         discount: 5,
+//         category:'headphone',
+//         brand:'sony'
+//     },
    
-    {
-        name:"I phone 14 Pro",
-        image:' https://i.ibb.co/cw82wBs/Apple-i-Phone-14-Pro-jpg.webp',
-        price: 1500,
-        discount: 15,
-        category:'smartphone',
-        brand:'apple'
-    },
-    {
-        name:"Haier H43K6FG 43' FHD Android  LED Tv",
-        image:'https://i.ibb.co/PzwK11v/h43k6fg-01-500x500.jpg',
-        price: 400,
-        discount: 12,
-        category:'television',
-        brand:'haier'
-    },
-    {
-        name:'16 inch Macbook Pro ',
-        image:'https://i.ibb.co/ncZB27c/7.jpg',
-        price: 1500,
-        discount: 20,
-        category:'laptop',
-        brand:'apple',
-    },
-    {
-        name:'16 inch Macbook Pro ',
-        image:'https://i.ibb.co/ncZB27c/7.jpg',
-        price: 1500,
-        discount: 20,
-        category:'laptop',
-        brand:'apple',
-    },
+//     {
+//         name:"I phone 14 Pro",
+//         image:' https://i.ibb.co/cw82wBs/Apple-i-Phone-14-Pro-jpg.webp',
+//         price: 1500,
+//         discount: 15,
+//         category:'smartphone',
+//         brand:'apple'
+//     },
+//     {
+//         name:"Haier H43K6FG 43' FHD Android  LED Tv",
+//         image:'https://i.ibb.co/PzwK11v/h43k6fg-01-500x500.jpg',
+//         price: 400,
+//         discount: 12,
+//         category:'television',
+//         brand:'haier'
+//     },
+//     {
+//         name:'16 inch Macbook Pro ',
+//         image:'https://i.ibb.co/ncZB27c/7.jpg',
+//         price: 1500,
+//         discount: 20,
+//         category:'laptop',
+//         brand:'apple',
+//     },
+//     {
+//         name:'16 inch Macbook Pro ',
+//         image:'https://i.ibb.co/ncZB27c/7.jpg',
+//         price: 1500,
+//         discount: 20,
+//         category:'laptop',
+//         brand:'apple',
+//     },
     
-    {
-        name:"Stereo Headphone",
-        image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
-        price: 50,
-        discount: 5,
-        category:'headphone',
-        brand:'sony'
-    },
+//     {
+//         name:"Stereo Headphone",
+//         image:' https://i.ibb.co/wS8wdnQ/gh-515w-01-500x500.webp',
+//         price: 50,
+//         discount: 5,
+//         category:'headphone',
+//         brand:'sony'
+//     },
    
    
    
-]
+// ]
+
+useEffect(()=>{
+AxiosBase().get('/products/best-selling')
+.then(res=>{
+    setProducts(res.data)
+ 
+})
+},[])
 
 const nextIndex = ()=>{
     const next = divIndex+1;
@@ -100,7 +110,7 @@ const previousIndex = ()=>{
             <Container>
                 <div className=' font-rubik bg-white'>
                <div className='py-2 px-4 pb-4 border-b-2 border-l-4 border-l-black flex justify-between items-center'>
-               <h1 className=' uppercase text-3xl text-black'>Best Selling Products</h1>
+               <h1 className=' uppercase md:text-3xl text-2xl text-black'>Best Selling Products</h1>
                 <div className='flex items-center gap-[2px]'>
                 <div className='bg-gray-200 text-black px-4 py-2' onClick={previousIndex}><FaArrowLeftLong></FaArrowLeftLong></div>
                 <div className='bg-gray-200 text-black px-4 py-2' onClick={nextIndex}><FaArrowRightLong></FaArrowRightLong></div>
@@ -113,7 +123,7 @@ const previousIndex = ()=>{
                 <img src="/images/image/top_sell.jpg" alt="" />
              </div>
                 </div> */}
-                <div className='relative min-h-[500px] overflow-x-auto'>
+                <div className='relative min-h-[350px] overflow-hidden'>
                 {
                     products.map((product,index)=>{
                         return <SliderCard product = {product} index={index} divIndex={divIndex} key={index}></SliderCard>
