@@ -5,7 +5,7 @@ const ResponsiveNavbar = ({isResponsiveNavbar,handler}) => {
     const [tabIndex,setTabIndex] = useState(0);
     const componentRef = useRef();
     const tabs = ['Home','Account','Setting'];
-    const navLinks = [{    display:'Home',  routes:'/'},{    display:'Shop',  routes:'/ego/shop'},{    display:'New Arrivals',  routes:'/ego/arrivals'},{    display:'Contact Us',  routes:'/contact'},{    display:'About us',  routes:'/about'},{    display:'Add Product',  routes:'/add-product'}]
+    const navLinks = [{    display:'Home',  routes:'/'},{    display:'Shop',  routes:'/ego/shop'},{    display:'New Arrivals',  routes:'/ego/new-arrivals'},{    display:'Contact Us',  routes:'/contact'},{    display:'About us',  routes:'/about'},{    display:'Add Product',  routes:'/add-product'}]
     const accounts = [{    display:'Sign in',  routes:'/ego/account/sign-in'},{    display:'Register',  routes:'/ego/account/register'}]
     const handleOutsideClick = (event) => {
         if (componentRef.current && !componentRef.current.contains(event.target)) {

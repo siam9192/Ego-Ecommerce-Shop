@@ -20,7 +20,8 @@ const AddProduct = () => {
       "Home Electronics",
       "Cameras",
       "Networking and Internet Devices",
-      "Drones and Robotics"
+      "Drones and Robotics",
+      "Watchs"
     ];
     
     const openFile = (e)=>{

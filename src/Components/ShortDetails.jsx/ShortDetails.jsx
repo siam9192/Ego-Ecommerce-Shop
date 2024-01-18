@@ -5,11 +5,14 @@ import { TiStarFullOutline, TiStarHalfOutline } from 'react-icons/ti';
 import { IoCheckmarkOutline } from 'react-icons/io5';
 import { FiHeart } from 'react-icons/fi';
 import { RxCross2 } from "react-icons/rx";
+import UserAuth from '../../Authentication/UserAuth/UserAuth';
+import { Navigate } from 'react-router-dom';
 const ShortDetails = ({isShortDetails,shortDetailsId,handleShortDetailsStatus}) => {
     const [product,setProduct] = useState(null);
     const [loading,setLoading] = useState(false);
     const [isFullDescription,setFullDescription] = useState(false);
-    const [cart,setCart] = useState(1)
+    const [cart,setCart] = useState(1);
+    const {user} = UserAuth();
     useEffect(()=>{
         if(!shortDetailsId){
             return;
@@ -33,6 +36,9 @@ const ShortDetails = ({isShortDetails,shortDetailsId,handleShortDetailsStatus}) 
     }
 
     const addToCart = ()=>{
+        if(!user){
+            return <Navigate to='/ego/account/sign-in'></Navigate>
+        }
         const newCart = {
             product_id:product._id,
             quantity:cart,
@@ -42,7 +48,7 @@ const ShortDetails = ({isShortDetails,shortDetailsId,handleShortDetailsStatus}) 
             price: product.pricing.price,
             discount:product.pricing.discount
         }
-        console.log(newCart)
+        
     AxiosBase().post('/add-to-cart',newCart)
     .then((res)=>{
         alert('Add to cart')
@@ -59,7 +65,7 @@ const ShortDetails = ({isShortDetails,shortDetailsId,handleShortDetailsStatus}) 
                 loading ? <div className='flex justify-center items-center'>
                     <div className='bg-white my-10 md:p-32   md:w-1/2 w-full h-60 text-center'>
                  <div className='md:mt-0 mt-24'>
-                 <span className="loading loading-spinner text-error text-5xl"></span>
+                 <span className=" loading loading-lg loading-spinner text-error "></span>
                  </div>
                 </div>
                 </div>

@@ -17,7 +17,7 @@ const Home = () => {
             <Services></Services>
             <Deal></Deal>
             <Container>
-            <div className='py-6'>
+            <div className='py-6 -mb-14'>
              <img src="/images/image/Banner1.jpg" alt="" />
             </div>
             </Container>

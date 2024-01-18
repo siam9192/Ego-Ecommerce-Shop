@@ -9,6 +9,7 @@ import ProductDetails from '../Pages/ProductDetails/ProductDetails';
 import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
 import About from '../Pages/About/About';
 import AddProduct from '../Pages/AddProduct/AddProduct';
+import NewArrivals from '../Pages/NewArrivals/NewArrivals';
 
 const Routes = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const Routes = createBrowserRouter([
             {
                 path:'/ego/shop',
                 element:<Shop></Shop>
+            },
+            {
+                path:'/ego/new-arrivals',
+                element:<NewArrivals></NewArrivals>
             },
             {
                 path:'/ego/product/:id/details',

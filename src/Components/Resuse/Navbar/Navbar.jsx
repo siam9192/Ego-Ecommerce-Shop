@@ -88,8 +88,8 @@ const handleSubmit = (e)=>{
            <div className='py-5 lg:px-0 px-2 bg-white lg:border-b  border-gray-200'>
            <Container>
                 <div className='flex justify-between items-center '>
-                  <div className="text-2xl text-black lg:hidden block" onClick={()=>{setIsResponsiveNavbar(true)
-                  console.log(1111)}}>
+                  <div className="text-2xl text-black lg:hidden block hover:cursor-pointer" onClick={()=>{setIsResponsiveNavbar(true)
+                 }}>
                   <GiHamburgerMenu></GiHamburgerMenu>
                   </div>
                  <img src="https://magento2.magentech.com/themes/sm_ego/pub/media/logomobile/default/Logo.png" alt="" />
@@ -155,7 +155,7 @@ const handleSubmit = (e)=>{
                     <ul className='flex text-black items-center gap-4'>
                         <Link>Home</Link>
                         <Link to='/ego/shop'>Shop</Link>
-                        <Link>New Arrivals</Link>
+                        <Link to='/ego/new-arrivals'>New Arrivals</Link>
                         <Link>Contact Us</Link>
                         <Link to='/about'>About Us</Link>
                         <Link to='/add-product'>Add Product</Link>

@@ -96,7 +96,8 @@ const nextIndex = ()=>{
 setDivIndex(next);
 }
 const previousIndex = ()=>{
-    const prev = responsiveIndex-1;
+    const prev = divIndex-1;
+    
     
     if(prev < 0){
         setDivIndex(products.length-1);

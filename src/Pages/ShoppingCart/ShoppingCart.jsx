@@ -16,18 +16,43 @@ const ShoppingCart = () => {
     })
    }
   },[user])
-  // const subTotal = carts.reduce((prev,current)=> {},0 )
-  // const subTotal = carts.reduce((prev,current)=> prev + current.price,0)
+ 
+const getPercentageValue = (mainNumber,percent)=>{
+  const result = (percent/100)*mainNumber;
+  return parseInt(result);
+}
+
   let subtotal = 0;
    carts.forEach(current=> {
    
-   subtotal =  (parseInt((current.price-((current.discount/100)*current.price))*current.quantity)) + subtotal;
+   subtotal = ((current.price-getPercentageValue(current.price,current.discount))*current.quantity) + subtotal;
    })
-  console.log( (parseInt((5/subtotal)*100)))
+  
+  const deleteCart = (id,index)=>{
+    AxiosBase().delete(`/user/cart/delete?id=${id}`)
+    .then((res)=>{
+      if(res.data.deletedCount > 0){
+        alert('Cart deleted successfully');
+        const  array = carts;
+        carts.splice(index,1);
+        setCarts([...array])
+      }
+    })
+    .catch((error)=>{
+      alert('Something went wrong')
+    })
+  }
+  const handleQuantity = (e,index)=>{
+   const array = carts
+    array[index].quantity = parseInt(e.target.value) || 1;
+    setCarts([...array])
+
+   
+  }
     return (
         <div className=' font-rubik'>
          <Container>
-      <div className='lg:flex gap-3 lg:px-0 px-2'>
+      <div className='lg:flex gap-5 lg:px-0 px-2'>
         <div className='lg:w-[70%]'>
         <h1 className='text-2xl text-black font-semibold uppercase'>shopping cart</h1>
          <div className='py-3  border-b lg:flex justify-between items-center lg:block hidden  '>
@@ -37,32 +62,40 @@ const ShoppingCart = () => {
           </div>
           
          </div>
-       {
-        carts.map((cart,index)=>{
-          return   <div className='py-3  border-b lg:flex justify-between items-center'>
-          <div className='flex gap-3'><img src={cart.image} className='w-32 h-32' alt="" />
-          <h3 className='text-black text-xl'>{cart.name}</h3>
-          </div> <div className='flex items-center gap-4'> 
-              <div className='flex-1'><h3 className='text-black '>${parseInt((cart.price-((cart.discount/100)*cart.price))*cart.quantity)}.00</h3></div> <div className='flex-1'><input type="number" value={cart.quantity}  className='w-20 h-10 border text-center'/></div>    <div className='flex-1 text-xl text-red-500'><RxCross1></RxCross1></div> 
-                </div>
-                
-               </div>
-         
-        })
-       }
+      {
+        carts.length ? 
+       <>
+        {
+          carts.map((cart,index)=>{
+            return   <div className='py-3  border-b lg:flex justify-between items-center'>
+            <div className='flex gap-3'><img src={cart.image} className='w-32 h-32' alt="" />
+            <h3 className='text-black text-xl'>{cart.name}</h3>
+            </div> <div className='flex items-center gap-4'> 
+                <div className='flex-1'><h3 className='text-black '>${((cart.price-getPercentageValue(cart.price,cart.discount))*cart.quantity)}.00</h3></div> <div className='flex-1'><input type="number" defaultValue={cart.quantity}  className='w-20 h-10 border text-center' onChange={(e)=>handleQuantity(e,index)}/></div>    <div className='flex-1 text-xl text-red-500 hover:cursor-pointer' onClick={()=>deleteCart(cart._id,index)}><RxCross1></RxCross1></div> 
+                  </div>
+                  
+                 </div>
+           
+          })
+         }</>
+         :
+         <div className='min-h-52'>
+          <h1 className='text-black text-3xl text-center py-14'>You have no product on cart</h1>
+         </div>
+      }
          
         </div>
-        <div className='lg:w-[30%] flex flex-col h-full bg-gray-200 p-4 max-h-[450px]'>
+        <div className='lg:w-[30%] flex flex-col h-full bg-gray-100 px-5 py-5 pb-10 max-h-[450px]'>
             <div className='flex-grow'>
             <h1 className='text-xl text-black font-semibold pb-2 border-b uppercase'>SUMMERY</h1>
             <div className='flex justify-between items-center py-2 border-b   border-gray-600 text-black '>
                 <h3>Subtotal</h3> <h3>${subtotal}</h3>
             </div>
             <div className='flex justify-between items-center py-2 border-b  border-gray-600 text-black '>
-                <h3>Shipping</h3> <h3>${subtotal + (5/subtotal)*100}</h3>
+                <h3>Shipping</h3> <h3>${getPercentageValue(subtotal,5)}</h3>
             </div>
             <div className='flex justify-between items-center py-5 border-b  border-gray-600 text-black '>
-                <h3>Order Total</h3> <h3>${subtotal + (subtotal + parseInt((5/subtotal)*100))}</h3>
+                <h3>Order Total</h3> <h3>${subtotal + getPercentageValue(subtotal,5)}</h3>
             </div>
             </div>
           <div className='pt-5'>

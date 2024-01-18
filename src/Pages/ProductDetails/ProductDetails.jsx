@@ -7,7 +7,7 @@ import { FiHeart } from 'react-icons/fi';
 import ProductReviews from './ProductReviews';
 import DetailsSideComponents from './DetailsSideComponents';
 import AxiosBase from '../../Axios/AxiosBase';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import UserAuth from '../../Authentication/UserAuth/UserAuth'
 import Reviews from '../../Components/Resuse/Reviews/Reviews';
 const ProductDetails = ({dangerouslySetInnerHTML}) => {
@@ -18,7 +18,7 @@ const ProductDetails = ({dangerouslySetInnerHTML}) => {
     const tabs = ['description','more information','reviews','report'];
     const [product,setProduct] = useState(null);
     const detailsRef = useRef(null)
-
+   const navigate = useNavigate ();
   const {user} =  UserAuth();
 
   useEffect(()=>{
@@ -46,6 +46,9 @@ const rattingPreview = ['So poor','Good','Very good','Great']
 
 
 const addToCart = ()=>{
+      if(!user){
+            return navigate('/ego/account/sign-in')
+        }
     const newCart = {
         product_id:product._id,
         quantity:cart,

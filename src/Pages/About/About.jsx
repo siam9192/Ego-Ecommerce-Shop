@@ -33,7 +33,7 @@ const About = () => {
         <div className='bg-[#f5f5f5] font-rubik py-10'>
             <Container>
                 <div className='lg:p-5 p-2 bg-white'>
-                    <img src="/images/image/about-image.jpg" className='w-full' alt="" />
+                    <img src="/images/image/about-image.jpg" className='w-full h-full' alt="" />
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-5 pt-6'>

@@ -5,11 +5,12 @@ import { PiShoppingBagOpenBold } from 'react-icons/pi';
 import { TiStarFullOutline, TiStarHalfOutline } from 'react-icons/ti';
 import Rating from 'react-rating';
 import { Link, useParams } from 'react-router-dom';
+import AxiosBase from '../../../Axios/AxiosBase';
+import UserAuth from '../../../Authentication/UserAuth/UserAuth';
 
 const ColumnCard = ({product,handleShortDetailsId,handleShortDetailsStatus,isShortDetails }) => {
     const [hover,setHover] = useState(false)
-    const [ShortDetails,setShortDetails] = useState(false);
-    
+    const {user} = UserAuth()
     const handleHover = (value)=>{
          setHover(value)
     }
@@ -17,9 +18,25 @@ const ColumnCard = ({product,handleShortDetailsId,handleShortDetailsStatus,isSho
     const handleShortDetails = (id)=>{
       handleShortDetailsStatus(true);
       handleShortDetailsId(id)
-      console.log(id)
+    
     }
- 
+    const addToCart = ()=>{
+      const newCart = {
+          product_id:product._id,
+          quantity:1,
+          email:user.email,
+          image:product.image,
+          name:product.productName,
+          price: product.pricing.price,
+          discount:product.pricing.discount
+      }
+     
+  AxiosBase().post('/add-to-cart',newCart)
+  .then((res)=>{
+      alert('Add to cart Successful')
+  })
+  }
+  
     return (
        
    <div>
@@ -43,7 +60,7 @@ const ColumnCard = ({product,handleShortDetailsId,handleShortDetailsStatus,isSho
         </div>
         </Link>
         <div className={`w-full flex justify-center items-center gap-2 text-black absolute transition-all duration-300 ease-out ${!hover?'-bottom-9' : 'bottom-8'}`}>
-                         <div className='bg-gray-200 p-2 rounded-full text-xl'>
+                         <div className='bg-gray-200 p-2 rounded-full text-xl hover:cursor-pointer' onClick={addToCart}>
                                <PiShoppingBagOpenBold></PiShoppingBagOpenBold>
                            </div>
                          <div className='bg-gray-200 p-2 rounded-full text-xl'>

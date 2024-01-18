@@ -16,6 +16,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import ResponsiveFilterBox from './ResponsiveFilterBox';
 import ShortDetails from '../../Components/ShortDetails.jsx/ShortDetails';
+import LoadingCard from '../../Components/Resuse/ProductCards/Loadingcard';
 const Shop = () => {
     const [cardStyle,setCardStyle] = useState('grid');
     const searchParams = useSearchParams();
@@ -43,6 +44,7 @@ const Shop = () => {
     // })
 
 const perPage = [12,25,50]
+const loadingArray = [1,2,3,4,5,6,7,8,9]
 useEffect(()=>{
     setCardStyle(localStorage.getItem('ego-card-style') || 'grid')
    let categoryParams = '';
@@ -63,11 +65,12 @@ useEffect(()=>{
 },[searchCategories,searchManufacture,minPrice,maxPrice])
 
 useEffect(()=>{
-  
+  setIsLoading(true)
     AxiosBase().get(`/products?key=""&category=${searchParams[0].get('category') || ''}&brands=${searchParams[0].get('brands')||''}&minPrice=${searchParams[0].get('minPrice')||''}&maxPrice=${searchParams[0].get('maxPrice')||''}&perPage=${perPage}&currentPage=${currentPage}`)
     .then(res=>{
         setProducts(res.data)
         productRef.current.scrollIntoView()
+        setIsLoading(false)
     })
     AxiosBase().get(`/products/document-count?key=""&category=${searchParams[0].get('category') || ''}&brands=${searchParams[0].get('brands')||''}&minPrice=${searchParams.minPrice}&maxPrice=${searchParams.maxPrice}&perPage=${perPage}&currentPage=${currentPage}`)
     .then(res =>{
@@ -166,17 +169,19 @@ const handleCardStyle = (value)=> {
                             </div>
                         </div>
 
-                        <div className={`${isLoading ? 'block min-h-[280px]' : 'hidden' } text-center py-32 w-full bg-white`}>
+                        {/* <div className={`${isLoading ? 'block min-h-[280px]' : 'hidden' } text-center py-32 w-full bg-white`}>
                         <span className="loading loading-ring loading-lg text-[#ff2424]"></span>
-                        </div>
+                        </div> */}
                         {/* products grid */}
                        {
                         cardStyle === 'grid' ?
                         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 mt-10'>
                             {
-                                products.map((product,index)=>{
-                                    return <ColumnCard product={product} key={index} handleShortDetailsId={handleShortDetailsId} handleShortDetailsStatus = {handleShortDetailsStatus} isShortDetails={isShortDetails}></ColumnCard>
-                                })
+                               isLoading ? loadingArray.map((item,index)=><LoadingCard key={index}></LoadingCard>)
+                               :
+                               products.map((product,index)=>{
+                                return <ColumnCard product={product} key={index} handleShortDetailsId={handleShortDetailsId} handleShortDetailsStatus = {handleShortDetailsStatus} isShortDetails={isShortDetails}></ColumnCard>
+                            })
                             }
                         </div>
                         :
@@ -184,7 +189,7 @@ const handleCardStyle = (value)=> {
                         <div className='space-y-5 mt-10'>
                         {
                             products.map((product,index)=>{
-                                return <ListCard product={product} key={index}></ListCard>
+                                return <ListCard product={product} key={index} handleShortDetailsId={handleShortDetailsId} handleShortDetailsStatus = {handleShortDetailsStatus} isShortDetails={isShortDetails}></ListCard>
                             })
                         }
                     </div>
