@@ -15,6 +15,7 @@ import AxiosBase from '../../Axios/AxiosBase';
 import { useQuery } from '@tanstack/react-query';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import ResponsiveFilterBox from './ResponsiveFilterBox';
+import ShortDetails from '../../Components/ShortDetails.jsx/ShortDetails';
 const Shop = () => {
     const [cardStyle,setCardStyle] = useState('grid');
     const searchParams = useSearchParams();
@@ -29,7 +30,8 @@ const Shop = () => {
     const [productPerPage,setProductPerPage] = useState(12)
     const [pages,setPages] = useState([]);
     const [currentPage,setCurrentPage] = useState(1);
-   
+    const [shortDetailsId,setShortDetailsId] = useState(null);
+    const [isShortDetails,setShortDetailsStatus] = useState(false)
     const navigate = useNavigate();
    const productRef = useRef(null);
     // const {data:products=[],refetch,isLoading} = useQuery({
@@ -56,8 +58,6 @@ useEffect(()=>{
     if(searchCategories||searchManufacture||minPrice||maxPrice){
         navigate(`/ego/shop?keyword=''&category=${categoryParams}&brands=${brandParams}&minPrice=${minPrice||0}&maxPrice=${maxPrice||0}`)
     }
-   
-    
     
 
 },[searchCategories,searchManufacture,minPrice,maxPrice])
@@ -124,8 +124,15 @@ const handleCardStyle = (value)=> {
  const handleResponsiveFilterBox = (value)=>{
     setIsResponsiveFilterBox(value)
  }
+ const handleShortDetailsStatus = (value)=>{
+    setShortDetailsStatus(value)
+ }
+ const handleShortDetailsId = (id)=>{
+    setShortDetailsId(id)
+ }
     return (
-        <div className='bg-[#f5f5f5] py-10 font-rubik'>
+       <div>
+         <div className='bg-[#f5f5f5] py-10 font-rubik'>
             <Container>
                 <div>
                     <p className='text-gray-700 pb-5'>{'Home > Shop'}</p>
@@ -168,11 +175,12 @@ const handleCardStyle = (value)=> {
                         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 mt-10'>
                             {
                                 products.map((product,index)=>{
-                                    return <ColumnCard product={product} key={index}></ColumnCard>
+                                    return <ColumnCard product={product} key={index} handleShortDetailsId={handleShortDetailsId} handleShortDetailsStatus = {handleShortDetailsStatus} isShortDetails={isShortDetails}></ColumnCard>
                                 })
                             }
                         </div>
                         :
+                        
                         <div className='space-y-5 mt-10'>
                         {
                             products.map((product,index)=>{
@@ -192,7 +200,7 @@ const handleCardStyle = (value)=> {
                                 <div className='py-3 px-4 bg-[#FF2424 text-whit '><HiArrowNarrowRight></HiArrowNarrowRight></div>
                             </div>
                             <div>
-                            <div className='flex items-center gap-2'>
+                            <div className='flex items-center gap-2 hidden'>
                             <p className='text-gray-900'>Show</p>
                            <select name="" id="" className='bg-white p-2 border' onChange={(e)=>setProductPerPage(parseInt(e.target.value))}>
                             {
@@ -214,6 +222,13 @@ const handleCardStyle = (value)=> {
         <ResponsiveFilterBox handleResponsiveFilterBox={handleResponsiveFilterBox} isResponsiveFilterBox={isResponsiveFilterBox} handleSearchCategories = {handleSearchCategories} handleSearchManufactures={handleSearchManufactures} handleMinPrice={handleMinPrice} handleMaxPrice={handleMaxPrice}></ResponsiveFilterBox>
         
         </div>
+       {
+        isShortDetails ? 
+        <ShortDetails isShortDetails={isShortDetails} shortDetailsId={shortDetailsId} handleShortDetailsStatus={handleShortDetailsStatus}></ShortDetails>
+        :
+        <></>
+       }
+       </div>
     );
 }
 

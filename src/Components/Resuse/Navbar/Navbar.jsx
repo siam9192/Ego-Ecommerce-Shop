@@ -5,7 +5,7 @@ import { FiHeart, FiUser } from "react-icons/fi";
 import { PiShoppingBagOpenBold } from "react-icons/pi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ResponsiveNavbar from './ResponsiveNavbar';
-
+import userAuth from '../../../Authentication/UserAuth/UserAuth'
 const Navbar = () => {
 //   Hooks
 const [departmentsMenu,setDepartmentsMenu] = useState(false)
@@ -14,7 +14,7 @@ const [cardBar,setCartBar] = useState(false);
 const [isResponsiveNavbar,setIsResponsiveNavbar] = useState(false);
 const navigate = useNavigate()
 const {pathname} = useLocation()
-
+const {user,logout} = userAuth()
     const categories = [
       "Smartphones",
       "Laptops",
@@ -109,8 +109,19 @@ const handleSubmit = (e)=>{
              <div className='hover:cursor-pointer' onMouseEnter={handleAccountBar} onMouseLeave={handleAccountBar}>
              <FiUser className='text-2xl text-black hover:text-[red] lg:block hidden'></FiUser>
              <div className={`p-2 border absolute flex flex-col gap-2 ${accountBar?'block' :'hidden'}`} >
-              <Link to={'/ego/account/sign-in'} className='p-1 bg-gray-200 text-black'>Sign in</Link>
-              <Link to={'/ego/account/register'} className='p-1 bg-gray-200 text-black'>Register</Link>
+         {
+          user ?    
+            <>
+            <Link to={'/ego/account/sign-in'} className='p-1 bg-gray-200 text-black'>Profile</Link>
+              <Link to={'/ego/account/register'} className='p-1 bg-gray-200 text-black'onClick={logout}>Logout</Link>
+            </>
+          :
+          <>
+          <Link to={'/ego/account/sign-in'} className='p-1 bg-gray-200 text-black'>Sign in</Link>
+            <Link to={'/ego/account/register'} className='p-1 bg-gray-200 text-black'>Register</Link>
+          </>
+        
+         }
               {/* <Link>Register</Link> */}
              </div>
              </div>

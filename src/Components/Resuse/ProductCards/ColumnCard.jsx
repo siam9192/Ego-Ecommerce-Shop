@@ -6,15 +6,26 @@ import { TiStarFullOutline, TiStarHalfOutline } from 'react-icons/ti';
 import Rating from 'react-rating';
 import { Link, useParams } from 'react-router-dom';
 
-const ColumnCard = ({product,index}) => {
+const ColumnCard = ({product,handleShortDetailsId,handleShortDetailsStatus,isShortDetails }) => {
     const [hover,setHover] = useState(false)
+    const [ShortDetails,setShortDetails] = useState(false);
     
     const handleHover = (value)=>{
          setHover(value)
     }
+
+    const handleShortDetails = (id)=>{
+      handleShortDetailsStatus(true);
+      handleShortDetailsId(id)
+      console.log(id)
+    }
+ 
     return (
-        <Link to={`/ego/product/${product._id}/details`}>
-          <div className={`flex flex-col space-y-3 font-rubik p-5 hover:shadow-lg relative h-full overflow-hidden bg-white `}  onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
+       
+   <div>
+     <div className='relative h-full overflow-hidden bg-white pb-2' onMouseEnter={()=>handleHover(true)} onMouseLeave={()=>handleHover(false)}>
+       <Link to={`/ego/product/${product._id}/details`}>
+    <div className={`flex flex-col space-y-3 font-rubik p-5 hover:shadow-lg relativ h-full overflow-hidden bg-white `}  >
            <div className='flex justify-center items-center flex-grow'>
            <img src={product.image} alt="" className='w-60'/>
            </div>
@@ -28,19 +39,24 @@ const ColumnCard = ({product,index}) => {
        />
  </div>
  <h1 className={`text-xl text-black text-center ${hover?'opacity-0':''}`}>${product.pricing.price}</h1>
- <div className={`w-full flex justify-center items-center gap-2 text-black absolute transition-all duration-300 ease-out ${!hover?'-bottom-9' : 'bottom-8'}`}>
+ 
+        </div>
+        </Link>
+        <div className={`w-full flex justify-center items-center gap-2 text-black absolute transition-all duration-300 ease-out ${!hover?'-bottom-9' : 'bottom-8'}`}>
                          <div className='bg-gray-200 p-2 rounded-full text-xl'>
                                <PiShoppingBagOpenBold></PiShoppingBagOpenBold>
                            </div>
                          <div className='bg-gray-200 p-2 rounded-full text-xl'>
                        <FiHeart></FiHeart>
                            </div>
-                           <div className='bg-gray-200 p-2 rounded-full text-xl'>
+                           <div className='bg-gray-200 p-2 rounded-full text-xl hover:cursor-pointer' onClick={()=>handleShortDetails(product._id)}>
                                <IoSearch></IoSearch>
                            </div>
                          </div>
-        </div>
-        </Link>
+    </div>
+   </div>
+    
+      
     );
 }
 

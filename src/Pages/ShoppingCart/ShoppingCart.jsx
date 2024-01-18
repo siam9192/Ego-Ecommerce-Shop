@@ -21,7 +21,7 @@ const ShoppingCart = () => {
   let subtotal = 0;
    carts.forEach(current=> {
    
-   subtotal =  (parseInt((current.price-((current.discount/current.price)*100))*current.quantity)) + subtotal;
+   subtotal =  (parseInt((current.price-((current.discount/100)*current.price))*current.quantity)) + subtotal;
    })
   console.log( (parseInt((5/subtotal)*100)))
     return (
@@ -43,7 +43,7 @@ const ShoppingCart = () => {
           <div className='flex gap-3'><img src={cart.image} className='w-32 h-32' alt="" />
           <h3 className='text-black text-xl'>{cart.name}</h3>
           </div> <div className='flex items-center gap-4'> 
-              <div className='flex-1'><h3 className='text-black '>${parseInt((cart.price-((cart.discount/cart.price)*100))*cart.quantity)}.00</h3></div> <div className='flex-1'><input type="number" value={cart.quantity}  className='w-20 h-10 border text-center'/></div>    <div className='flex-1 text-xl text-red-500'><RxCross1></RxCross1></div> 
+              <div className='flex-1'><h3 className='text-black '>${parseInt((cart.price-((cart.discount/100)*cart.price))*cart.quantity)}.00</h3></div> <div className='flex-1'><input type="number" value={cart.quantity}  className='w-20 h-10 border text-center'/></div>    <div className='flex-1 text-xl text-red-500'><RxCross1></RxCross1></div> 
                 </div>
                 
                </div>
