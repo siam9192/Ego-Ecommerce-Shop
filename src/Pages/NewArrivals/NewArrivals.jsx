@@ -64,6 +64,10 @@ const handleShortDetailsStatus = (value)=>{
                         </div>
                     </div>
                 </div>
+                {/* <video width={"640"} height={"360"} id="player1" preload="none">
+    <source type="video/youtube" src="https://youtu.be/mF2BHtQh4EI?si=jY8APs-IyQTmhmRN" />
+</video> */}
+
             </Container>
             </div>
             </div>

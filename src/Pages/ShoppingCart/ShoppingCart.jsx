@@ -3,6 +3,8 @@ import Container from '../../Components/Resuse/Container/Container';
 import { RxCross1 } from "react-icons/rx";
 import UserAuth from '../../Authentication/UserAuth/UserAuth';
 import AxiosBase from '../../Axios/AxiosBase';
+import {loadStripe} from '@stripe/stripe-js';
+import axios from 'axios';
 const ShoppingCart = () => {
   const [carts,setCarts] = useState([]);
   const {user} = UserAuth();
@@ -48,6 +50,23 @@ const getPercentageValue = (mainNumber,percent)=>{
     setCarts([...array])
 
    
+  }
+  const makePayment =async()=>{
+    const stripe = await loadStripe('pk_test_51OEFoaF0un34BsUzlCeA1Qjv16j4AbeWpd3AUsVgVxb4JD1DbZ57GjcCYn8sNbeoiHX8svh7iTzqMTc2mmymbdXr00cb9TNfxr')
+    const body = {
+    products:carts,
+  
+  }
+    const response = await AxiosBase().post('/create-checkout-session',body);
+    const session = response.data
+    const result = stripe.redirectToCheckout({
+      sessionId:session.id
+    });
+    if(result.error){
+      console.log(result.error)
+    }
+
+
   }
     return (
         <div className=' font-rubik'>
@@ -99,7 +118,7 @@ const getPercentageValue = (mainNumber,percent)=>{
             </div>
             </div>
           <div className='pt-5'>
-          <button className='bg-[#292626] text-white  uppercase w-full py-3'>proceed and checkout</button>
+          <button className='bg-[#292626] text-white  uppercase w-full py-3' onClick={makePayment}>proceed and checkout</button>
           </div>
         </div>
       </div>
